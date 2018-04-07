@@ -1,5 +1,9 @@
+import * as Rxjs from 'rxjs'
+import {UsersService} from './users.service'
 export class View {
     constructor () {
+        this.service = new UsersService
+
         this.mainDiv = document.getElementById('main')
         
         this.mainDiv.appendChild(this.renderLogin())
@@ -13,6 +17,7 @@ export class View {
     renderRegister () {
         const regDiv = document.createElement('div')
         regDiv.className = 'regPageDiv'
+
             const userInput = document.createElement('input')
             userInput.className = 'userInput'
             regDiv.appendChild(userInput)
@@ -24,7 +29,17 @@ export class View {
             const submitButton = document.createElement('button')
             submitButton.className = 'submitButton'
             submitButton.innerHTML = 'Register'
-            submitButton.onclick = () => this.displayPage('loginPageDiv')
+            Rxjs.Observable.fromEvent(submitButton, 'click')
+                .subscribe(() => {
+                    const credentials = {
+                        username: userInput.value,
+                        password: passInput.value
+                    }
+                    console.log('subscriber running')
+                    this.service.addUser(credentials)
+                        .then(() => this.displayPage('loginPageDiv'))
+                        .catch(rej => {})
+                })
             regDiv.appendChild(submitButton)
         return regDiv
     }
