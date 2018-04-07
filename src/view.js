@@ -3,7 +3,7 @@ import {UsersService} from './users.service'
 export class View {
     constructor () {
         this.service = new UsersService
-
+        
         this.mainDiv = document.getElementById('main')
         
         this.mainDiv.appendChild(this.renderLogin())
@@ -35,12 +35,25 @@ export class View {
                         username: userInput.value,
                         password: passInput.value
                     }
-                    console.log('subscriber running')
                     this.service.addUser(credentials)
                         .then(() => this.displayPage('loginPageDiv'))
+                        .then(() => {
+                            userInput.value = ''
+                            passInput.value = ''
+                        })
                         .catch(rej => {})
                 })
             regDiv.appendChild(submitButton)
+
+            const backButton = document.createElement('button')
+            backButton.className = 'backButton'
+            backButton.innerHTML = 'Back'
+            backButton.onclick = () => {
+                userInput.value = ''
+                passInput.value = ''
+                this.displayPage('loginPageDiv')
+            }
+            regDiv.appendChild(backButton)
         return regDiv
     }
     renderLogin () {
@@ -57,7 +70,21 @@ export class View {
             const submitButton = document.createElement('button')
             submitButton.className = 'submitButton'
             submitButton.innerHTML = 'Login'
-            submitButton.onclick = () => this.displayPage('mainPageDiv')
+            Rxjs.Observable.fromEvent(submitButton, 'click')
+                .subscribe(() => {
+                    const credentials = {
+                        username: userInput.value,
+                        password: passInput.value
+                    }
+                    this.service.checkUser(credentials)
+                        .then(res => this.service.setData(res))
+                        .then(() => this.displayPage('mainPageDiv'))
+                        .then(() => {
+                            userInput.value = ''
+                            passInput.value = ''
+                        })
+                        .catch(rej => {})
+                })
             loginDiv.appendChild(submitButton)
 
             const registerLink = document.createElement('a')
