@@ -6,8 +6,82 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <style>
-        html, body, #main{
-            height: 100%
+        html, body, #main {
+            height: 100%;
+            overflow: hidden;
+            margin: 0;
+        }
+        header {
+            height: 50px;
+            background-color: blue;
+        }
+        aside {
+            height: 100%;
+            width: 250px;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            border-right: 1px solid grey;
+            overflow-y: scroll;
+        }
+        .subjectDiv {
+            position: relative;
+            cursor: pointer;
+            min-height: 200px;
+            width: 200px;
+            height: 200px;
+            border-radius: 10px;
+            margin: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        .deleteBox {
+            position: absolute;
+            top: 0;
+            right:0;
+            height: 20px;
+            width: 20px;
+            color: white;
+            text-align: center;
+            border: 1px solid white;
+            border-radius: 20px;
+            font-family: "Century Gothic", CenturyGothic, Geneva, AppleGothic, sans-serif;
+            background-color: red;
+        }
+        .subjectAddButton {
+            min-height: 50px;
+            height: 50px;
+            width: 50px;
+            border-radius: 50px;
+            margin: 10px;
+            display: flex;
+            order: 99;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            background-color: blue;
+        }
+        .text {
+            font-size: 30px;
+            font-family: "Century Gothic", CenturyGothic, Geneva, AppleGothic, sans-serif;
+        }
+        .subjectInput {
+            min-height: 200px;
+            order: 98;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-around;
+            width: 200px;
+            height: 200px;
+            border-radius: 10px;
+            margin: 10px;
+            border: 1px solid black;
+        }
+        [hidden] { 
+            display: none !important; 
         }
     </style>
 </head>

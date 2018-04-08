@@ -3,17 +3,18 @@ export class UsersService {
         this.data = {}
     }
     addUser (credentials) {
-        if (!credentials.username || !credentials.password) {
+        if (!credentials.id || !credentials.password) {
             alert('Input username and password')
             return Promise.reject()
         } else {
-            return fetch(`http://localhost:3000/users?username=${credentials.username}`)
+            return fetch(`http://localhost:3000/users?id=${credentials.id}`)
                 .then(res => res.json())
                 .then(res => {
                     if (res.length != 0) {
                         alert('Username already exists')
                         return Promise.reject()
                     } else {
+                        credentials.subjects = []
                         fetch('http://localhost:3000/users', {
                             method: 'POST', 
                             body: JSON.stringify(credentials), 
@@ -28,11 +29,11 @@ export class UsersService {
         }
     }
     checkUser (credentials) {
-        if (!credentials.username || !credentials.password) {
+        if (!credentials.id || !credentials.password) {
             alert('Input username and password')
             return Promise.reject()
         } else {
-            return fetch(`http://localhost:3000/users?username=${credentials.username}&password=${credentials.password}`)
+            return fetch(`http://localhost:3000/users?id=${credentials.id}&password=${credentials.password}`)
                 .then(res => res.json())
                 .then(res => {
                     if (res.length == 0) {
@@ -48,5 +49,15 @@ export class UsersService {
     }
     setData (data) {
         this.data = data
+        return new Promise((resolve, reject) => resolve(data))
     }
+    updateUser () {
+        return fetch(`http://localhost:3000/users/${this.data.id}`, {
+            method: 'PUT', 
+            body: JSON.stringify(this.data), 
+            headers: new Headers({
+                'Content-Type': 'application/json'
+            })
+        })
+    } 
 }

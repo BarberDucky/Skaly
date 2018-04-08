@@ -3,14 +3,14 @@ import {UsersService} from './users.service'
 export class View {
     constructor () {
         this.service = new UsersService
-        
+        this.sideList = {}
         this.mainDiv = document.getElementById('main')
         
         this.mainDiv.appendChild(this.renderLogin())
         this.mainDiv.appendChild(this.renderRegister())
         this.mainDiv.appendChild(this.renderMain())
 
-        this.displayPage('mainPageDiv')
+        this.displayPage('loginPageDiv')
 
         document.body.appendChild(this.mainDiv)
     }
@@ -26,7 +26,7 @@ export class View {
             Rxjs.Observable.fromEvent(submitButton, 'click')
                 .subscribe(() => {
                     const credentials = {
-                        username: userInput.value,
+                        id: userInput.value,
                         password: passInput.value
                     }
                     this.service.addUser(credentials)
@@ -57,11 +57,12 @@ export class View {
             Rxjs.Observable.fromEvent(submitButton, 'click')
                 .subscribe(() => {
                     const credentials = {
-                        username: userInput.value,
+                        id: userInput.value,
                         password: passInput.value
                     }
                     this.service.checkUser(credentials)
                         .then(res => this.service.setData(res))
+                        .then(res => this.updateAside(this.sideList, this.service.data.subjects))
                         .then(() => this.displayPage('mainPageDiv'))
                         .then(() => {
                             userInput.value = ''
@@ -80,10 +81,12 @@ export class View {
         mainPageDiv.style.height = '100%'
             const header = this.header(mainPageDiv)
             const aside = this.aside(mainPageDiv)
-            console.log(header, aside)
+            this.updateAside(aside, this.service.data.subjects)
+            this.sideList = aside
+        this.mainDiv.appendChild(mainPageDiv)
         return mainPageDiv
     }
-    displayPage (page) {
+    displayPage (page) {  // <------
         document.querySelectorAll("[class$='PageDiv']").forEach(div => {
             if (div.className == page) {
                 div.hidden = false
@@ -97,22 +100,27 @@ export class View {
         const logoutButton = document.createElement('button')
         logoutButton.className = 'logoutButton'
         logoutButton.innerHTML = 'Logout'
-        logoutButton.onclick = () => this.displayPage('loginPageDiv')
         parent.appendChild(logoutButton)
         return logoutButton 
     }
     header (parent) {
         const header = document.createElement('header')
-        header.style.backgroundColor = 'blue'
             const logoutButton = this.logoutButton(header)
+            logoutButton.onclick = () => {
+                this.deleteAside(this.sideList, this.service.data.subjects)
+                this.displayPage('loginPageDiv')
+            }
         parent.appendChild(header)
         return header
     }
     aside (parent) {
         const aside = document.createElement('aside')
-        aside.style.backgroundColor = 'red'
-        aside.style.width = '100px'
-        aside.style.height = '100%'
+            const subjectInput = this.subjectInput(aside)
+            subjectInput.hidden = true
+            const subjectAddButton = this.subjectAddButton(aside)
+            subjectAddButton.onclick = () => {
+                subjectInput.hidden = false
+            }
         parent.appendChild(aside)
         return aside
     }
@@ -149,5 +157,104 @@ export class View {
         registerLink.innerHTML = 'Register'
         parent.appendChild(registerLink)
         return registerLink
+    }
+    subjectDiv (parent, data) {
+        const subjectDiv = document.createElement('div')
+        subjectDiv.className = 'subjectDiv'
+        subjectDiv.style.backgroundColor = data.color
+        subjectDiv.id = data.text
+            const text = document.createElement('span')
+            text.className = 'text'
+            text.style.color = 'white'
+            text.innerHTML = data.text
+            subjectDiv.appendChild(text)
+
+            const deleteBox = this.deleteBox(subjectDiv)
+            deleteBox.onclick = () => {
+                const newSubjects = this.service.data.subjects
+                    .filter(subject => {
+                            return subject.text != subjectDiv.id
+                    })
+                console.log(newSubjects)
+                this.service.data.subjects = newSubjects
+                this.deleteAsideOne(parent, subjectDiv.id)
+                this.service.updateUser()
+            }
+        parent.appendChild(subjectDiv)
+        return subjectDiv
+
+    }
+    deleteBox (parent) {
+        const deleteBox = document.createElement('div')
+        deleteBox.className = 'deleteBox'
+        deleteBox.innerHTML = 'x'
+        parent.appendChild(deleteBox)
+        return deleteBox
+    }
+    updateAside (aside, data) {
+        if (data) {
+            data.forEach(subject => {
+                const subjectDiv = this.subjectDiv(aside, subject)
+            })
+        }
+    }
+    updateAsideOne (aside, data) {
+        if (data) {
+            const subjectDiv = this.subjectDiv(aside, data)
+        }
+    }
+    deleteAside (aside, data) {
+        if (data) {
+            data.forEach(subject => {
+                this.deleteAsideOne(aside, subject.text)
+            })
+        }
+    }
+    deleteAsideOne (aside, data) {
+        if (data) {
+            document.getElementById(data).remove()
+        }
+    }
+    subjectAddButton (parent) {
+        const subjectAddButton = document.createElement('div')
+        subjectAddButton.className = 'subjectAddButton'
+            const text = document.createElement('span')
+            text.className = 'text'
+            text.style.color = 'white'
+            text.innerHTML = '+'
+            subjectAddButton.appendChild(text)
+        parent.appendChild(subjectAddButton)
+        return subjectAddButton
+    }
+    subjectInput (parent) {
+        const subjectInput = document.createElement('div')
+        subjectInput.className = 'subjectInput'
+            const nameInput = document.createElement('input')
+            nameInput.className = 'nameInput'
+            subjectInput.appendChild(nameInput)
+
+            const colorPicker = this.colorPicker(subjectInput)
+
+            const submitButton = this.submitButton(subjectInput, 'Submit subject')
+            submitButton.onclick = () => {
+                const newInput = {text: nameInput.value, color: colorPicker.value}
+                this.service.data.subjects.push(newInput)
+                nameInput.value = ''
+                colorPicker.value = '#000000'
+                subjectInput.hidden = true
+                this.service.updateUser()
+                    .then(this.updateAsideOne(parent, newInput))
+            }
+            const backButton = this.backButton(subjectInput)
+            backButton.onclick = () => subjectInput.hidden = true
+        parent.appendChild(subjectInput)
+        return subjectInput
+    }
+    colorPicker (parent) {
+        const colorPicker = document.createElement('input')
+        colorPicker.className = 'colorPicker'
+        colorPicker.setAttribute('type', 'color')
+        parent.appendChild(colorPicker)
+        return colorPicker
     }
 }
