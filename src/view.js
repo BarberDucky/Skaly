@@ -10,7 +10,7 @@ export class View {
         this.mainDiv.appendChild(this.renderRegister())
         this.mainDiv.appendChild(this.renderMain())
 
-        this.displayPage('loginPageDiv')
+        this.displayPage('mainPageDiv')
 
         document.body.appendChild(this.mainDiv)
     }
@@ -18,17 +18,11 @@ export class View {
         const regDiv = document.createElement('div')
         regDiv.className = 'regPageDiv'
 
-            const userInput = document.createElement('input')
-            userInput.className = 'userInput'
-            regDiv.appendChild(userInput)
+            const userInput = this.userInput(regDiv)
 
-            const passInput = document.createElement('input')
-            passInput.className = 'passInput'
-            regDiv.appendChild(passInput)
+            const passInput = this.passInput(regDiv)
 
-            const submitButton = document.createElement('button')
-            submitButton.className = 'submitButton'
-            submitButton.innerHTML = 'Register'
+            const submitButton = this.submitButton(regDiv, 'Register')
             Rxjs.Observable.fromEvent(submitButton, 'click')
                 .subscribe(() => {
                     const credentials = {
@@ -43,33 +37,23 @@ export class View {
                         })
                         .catch(rej => {})
                 })
-            regDiv.appendChild(submitButton)
 
-            const backButton = document.createElement('button')
-            backButton.className = 'backButton'
-            backButton.innerHTML = 'Back'
+            const backButton = this.backButton(regDiv)
             backButton.onclick = () => {
                 userInput.value = ''
                 passInput.value = ''
                 this.displayPage('loginPageDiv')
             }
-            regDiv.appendChild(backButton)
         return regDiv
     }
     renderLogin () {
         const loginDiv = document.createElement('div')
         loginDiv.className = 'loginPageDiv'
-            const userInput = document.createElement('input')
-            userInput.className = 'userInput'
-            loginDiv.appendChild(userInput)
+            const userInput = this.userInput(loginDiv)
 
-            const passInput = document.createElement('input')
-            passInput.className = 'passInput'
-            loginDiv.appendChild(passInput)
+            const passInput = this.passInput(loginDiv)
 
-            const submitButton = document.createElement('button')
-            submitButton.className = 'submitButton'
-            submitButton.innerHTML = 'Login'
+            const submitButton = this.submitButton(loginDiv, 'Login')
             Rxjs.Observable.fromEvent(submitButton, 'click')
                 .subscribe(() => {
                     const credentials = {
@@ -85,23 +69,18 @@ export class View {
                         })
                         .catch(rej => {})
                 })
-            loginDiv.appendChild(submitButton)
 
-            const registerLink = document.createElement('a')
-            registerLink.className = 'registerLink'
-            registerLink.innerHTML = 'Register'
+            const registerLink = this.registerLink(loginDiv)
             registerLink.onclick = () => this.displayPage('regPageDiv')
-            loginDiv.appendChild(registerLink)
         return loginDiv
     }
     renderMain () {
         const mainPageDiv = document.createElement('div')
         mainPageDiv.className = 'mainPageDiv'
-            const logoutButton = document.createElement('button')
-            logoutButton.className = 'logoutButton'
-            logoutButton.innerHTML = 'Logout'
-            logoutButton.onclick = () => this.displayPage('loginPageDiv')
-            mainPageDiv.appendChild(logoutButton)
+        mainPageDiv.style.height = '100%'
+            const header = this.header(mainPageDiv)
+            const aside = this.aside(mainPageDiv)
+            console.log(header, aside)
         return mainPageDiv
     }
     displayPage (page) {
@@ -113,5 +92,62 @@ export class View {
             }
         })
     }
-
+    //components
+    logoutButton (parent) {
+        const logoutButton = document.createElement('button')
+        logoutButton.className = 'logoutButton'
+        logoutButton.innerHTML = 'Logout'
+        logoutButton.onclick = () => this.displayPage('loginPageDiv')
+        parent.appendChild(logoutButton)
+        return logoutButton 
+    }
+    header (parent) {
+        const header = document.createElement('header')
+        header.style.backgroundColor = 'blue'
+            const logoutButton = this.logoutButton(header)
+        parent.appendChild(header)
+        return header
+    }
+    aside (parent) {
+        const aside = document.createElement('aside')
+        aside.style.backgroundColor = 'red'
+        aside.style.width = '100px'
+        aside.style.height = '100%'
+        parent.appendChild(aside)
+        return aside
+    }
+    userInput (parent) {
+        const userInput = document.createElement('input')
+        userInput.className = 'userInput'
+        parent.appendChild(userInput)
+        return userInput
+    }
+    passInput (parent) {
+        const passInput = document.createElement('input')
+        passInput.className = 'passInput'
+        passInput.type = 'password'
+        parent.appendChild(passInput)
+        return passInput
+    }
+    backButton (parent) {
+        const backButton = document.createElement('button')
+        backButton.className = 'backButton'
+        backButton.innerHTML = 'Back'
+        parent.appendChild(backButton) 
+        return backButton        
+    }
+    submitButton (parent, text) {
+        const submitButton = document.createElement('button')
+        submitButton.className = 'submitButton'
+        submitButton.innerHTML = text
+        parent.appendChild(submitButton)
+        return submitButton
+    }
+    registerLink (parent) {
+        const registerLink = document.createElement('a')
+        registerLink.className = 'registerLink'
+        registerLink.innerHTML = 'Register'
+        parent.appendChild(registerLink)
+        return registerLink
+    }
 }
