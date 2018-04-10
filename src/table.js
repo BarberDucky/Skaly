@@ -1,4 +1,5 @@
 import Selector from './selector'
+import Widgets from './widgets'
 
 export default class Table {
     constructor (parent) {
@@ -6,9 +7,11 @@ export default class Table {
         this.main.className = 'tableMain'
         this.table = []
         this.rows = []
+        this.selectedBox = {}
 
         this.selector = new Selector(this.main)
         this.tableDiv = this.createTable(this.main)
+        this.selectedInput = this.createInput(this.main)
 
         parent.appendChild(this.main)
     }
@@ -82,7 +85,7 @@ export default class Table {
             this.rows[i].id = `row${i}`
             tableDiv.appendChild(this.rows[i])
             this.table[i] = []
-            for (let j = 0; j < 8; j++) {
+            for (let j = 0; j < 10; j++) {
                 const newCell = document.createElement('td')
                 newCell.id = `cell${i}${j}`
                 newCell.history = []
@@ -95,7 +98,13 @@ export default class Table {
                         control.hidden = !control.hidden
                     })
                 }
-                
+                newCell.ondblclick = () => {
+                    if (newCell.data) {
+                        this.selectedBox = newCell
+                        this.selectedInput.hidden = false
+                    }
+                    console.log(this.selectedBox)
+                }
                 newCell.ondragover = (ev) => {
                     ev.preventDefault()
                 }
@@ -114,6 +123,7 @@ export default class Table {
                         newCell.code = `X${newCell.code.slice(1)}`
                         this.updateBox(newCell, true)
                         newCell.draggable = false
+                        newCell.points = 0
                     }
                 }
                 this.table[i][j] = newCell
@@ -142,7 +152,7 @@ export default class Table {
         const outBoxLeft = document.createElement('div')
         outBoxLeft.className = 'outBoxLeft'
         outBoxLeft.onclick = () => {
-            if(x != 7) {
+            if(x != this.table[0].length-1) {
                 let a = x
                 let b = y + 1
                 while (b < this.table[a].length && this.table[a][b].hidden == true ) {
@@ -158,11 +168,19 @@ export default class Table {
                     } else {
                         let oldSpanNext = parseInt(nextElement.colSpan)
                         nextElement.colSpan = `${oldSpanNext - 1}`
+                        if (nextElement.points) {
+                            nextElement.points = (((oldSpanNext-1) * nextElement.points) / oldSpanNext).toFixed(2)
+                            nextElement.lowerText.innerHTML = nextElement.points
+                        }
                         nextElement.code = nextElement.code.slice(0, -1)
                         parent.history.push({oper:'borrow', target: nextElement})
                     }
                     this.table[x][y].colSpan = `${oldSpan+1}`
                     this.table[x][y].code += '+'
+                    if (this.table[x][y].points) {
+                        this.table[x][y].points = (((oldSpan+1) * this.table[x][y].points) / oldSpan).toFixed(2)
+                        this.table[x][y].lowerText.innerHTML = this.table[x][y].points
+                    }
                 }
             }
         }
@@ -187,6 +205,10 @@ export default class Table {
                     let oldSpanNext = parseInt(lastMove.target.colSpan)
                     lastMove.target.colSpan = `${oldSpanNext + 1}`
                     lastMove.target.code += '+'
+                    if (lastMove.target.points) {
+                        lastMove.target.points = (((oldSpanNext+1) * lastMove.target.points) / oldSpanNext).toFixed(2)
+                        lastMove.target.lowerText.innerHTML = lastMove.target.points
+                    }
                 } else {
                     let prev = this.table[x][y + oldSpan - 1]
                     prev.hidden = false
@@ -198,6 +220,10 @@ export default class Table {
                 }
                 this.table[x][y].colSpan = `${oldSpan - 1}`
                 this.table[x][y].code = this.table[x][y].code.slice(0, -1)
+                if (this.table[x][y].points) {
+                    this.table[x][y].points = ((oldSpan-1) * this.table[x][y].points) / oldSpan
+                    this.table[x][y].lowerText.innerHTML = this.table[x][y].points
+                }
             }
         }
         inBoxLeft.hidden = true
@@ -216,7 +242,6 @@ export default class Table {
         parent.lowerText = lowerText
         lowerText.className = 'lowerText'
         parent.appendChild(lowerText)
-
     }
 
     updateBox(element, reset) {
@@ -225,7 +250,6 @@ export default class Table {
             element.style.color = element.data.color
             element.style.borderColor = element.data.color
             element.upperText.innerHTML = element.data.text[0]
-            element.lowerText.innerHTML = element.data.text
             element.draggable = true
         } else {
             element.style.color = 'slateblue'
@@ -234,8 +258,32 @@ export default class Table {
             element.lowerText.innerHTML = ''
             element.draggable = false
         }
-        
-
+    }
+    createInput(parent) {
+        const pointDiv = Widgets.div(parent, 'pointDiv')
+            const pointInput = Widgets.input(pointDiv, 'text')
+            const maxInput = Widgets.input(pointDiv, 'text')
+            const submitButton = Widgets.button(pointDiv, 'Submit')
+            const cancelButton = Widgets.button(pointDiv, 'Cancel')
+            pointDiv.hidden = true
+            submitButton.onclick = () => {
+                let colSpan = parseInt(this.selectedBox.colSpan)
+                let point = parseInt(pointInput.value)
+                let max = parseInt(maxInput.value)
+                if(!isNaN(point) && !isNaN(max) && max >= point){
+                    this.selectedBox.points = (((point * 100 / max) / 100) * 10 * colSpan).toFixed(2)
+                    this.selectedBox.lowerText.innerHTML = this.selectedBox.points
+                    pointDiv.hidden = true
+                    pointInput.value = ''
+                    maxInput.value = ''
+                } else {
+                    alert('invalid input')
+                }
+            }
+            cancelButton.onclick = () => {
+                pointDiv.hidden = true
+            }
+        return pointDiv
     }
 }
 
