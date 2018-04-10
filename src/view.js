@@ -1,28 +1,31 @@
 import * as Rxjs from 'rxjs'
+import Table from './table'
+import Widgets from './widgets'
 import {UsersService} from './users.service'
 export class View {
     constructor () {
         this.service = new UsersService
         this.sideList = {}
+        this.selectedSubject = {}
+        this.last = {}
+        this.table = {}
         this.mainDiv = document.getElementById('main')
-        
-        this.mainDiv.appendChild(this.renderLogin())
-        this.mainDiv.appendChild(this.renderRegister())
-        this.mainDiv.appendChild(this.renderMain())
+        this.mainDiv.registerPage = this.renderRegister(this.mainDiv)
+        this.mainDiv.loginPage = this.renderLogin(this.mainDiv)
+        this.mainDiv.mainPage = this.renderMain(this.mainDiv)
 
         this.displayPage('loginPageDiv')
 
         document.body.appendChild(this.mainDiv)
     }
-    renderRegister () {
-        const regDiv = document.createElement('div')
-        regDiv.className = 'regPageDiv'
+    renderRegister (parent) {
+        const regDiv = Widgets.div(parent, 'regPageDiv')
 
-            const userInput = this.userInput(regDiv)
+            const userInput = Widgets.input(regDiv, 'text')
 
-            const passInput = this.passInput(regDiv)
+            const passInput = Widgets.input(regDiv, 'password')
 
-            const submitButton = this.submitButton(regDiv, 'Register')
+            const submitButton = Widgets.button(regDiv, 'Register')
             Rxjs.Observable.fromEvent(submitButton, 'click')
                 .subscribe(() => {
                     const credentials = {
@@ -38,7 +41,7 @@ export class View {
                         .catch(rej => {})
                 })
 
-            const backButton = this.backButton(regDiv)
+            const backButton = Widgets.button(regDiv, 'Back')
             backButton.onclick = () => {
                 userInput.value = ''
                 passInput.value = ''
@@ -46,14 +49,13 @@ export class View {
             }
         return regDiv
     }
-    renderLogin () {
-        const loginDiv = document.createElement('div')
-        loginDiv.className = 'loginPageDiv'
-            const userInput = this.userInput(loginDiv)
+    renderLogin (parent) {
+        const loginDiv = Widgets.div(parent, 'loginPageDiv')
+        const userInput = Widgets.input(loginDiv, 'text')
 
-            const passInput = this.passInput(loginDiv)
+        const passInput = Widgets.input(loginDiv, 'password')
 
-            const submitButton = this.submitButton(loginDiv, 'Login')
+            const submitButton = Widgets.button(loginDiv, 'Login')
             Rxjs.Observable.fromEvent(submitButton, 'click')
                 .subscribe(() => {
                     const credentials = {
@@ -71,19 +73,15 @@ export class View {
                         .catch(rej => {})
                 })
 
-            const registerLink = this.registerLink(loginDiv)
-            registerLink.onclick = () => this.displayPage('regPageDiv')
+            const registerButton = Widgets.button(loginDiv, 'Register')
+            registerButton.onclick = () => this.displayPage('regPageDiv')
         return loginDiv
     }
-    renderMain () {
-        const mainPageDiv = document.createElement('div')
-        mainPageDiv.className = 'mainPageDiv'
+    renderMain (parent) {
+        const mainPageDiv = Widgets.div(parent, 'mainPageDiv')
         mainPageDiv.style.height = '100%'
             const header = this.header(mainPageDiv)
-            const aside = this.aside(mainPageDiv)
-            this.updateAside(aside, this.service.data.subjects)
-            this.sideList = aside
-        this.mainDiv.appendChild(mainPageDiv)
+            this.contentHolder = this.contentHolder(mainPageDiv)
         return mainPageDiv
     }
     displayPage (page) {  // <------
@@ -96,18 +94,31 @@ export class View {
         })
     }
     //components
-    logoutButton (parent) {
-        const logoutButton = document.createElement('button')
-        logoutButton.className = 'logoutButton'
-        logoutButton.innerHTML = 'Logout'
-        parent.appendChild(logoutButton)
-        return logoutButton 
+    contentHolder (parent) {
+        const contentHolder = Widgets.div(parent, 'contentHolder')
+            const aside = this.aside(contentHolder)
+            this.updateAside(aside, this.service.data.subjects)
+            this.sideList = aside
+            this.table = new Table(contentHolder)
+            this.table.main.hidden = true
+            const button = Widgets.button(contentHolder, 'push table')
+            button.onclick = () => {
+                this.service.data.subjects.map(subject => {
+                    if (subject.text == this.selectedSubject.id) {
+                        subject.scale = this.table.getData()
+                    }
+                })
+                console.log(this.service.data)
+                this.service.updateUser()
+            }
+        return contentHolder
     }
     header (parent) {
         const header = document.createElement('header')
-            const logoutButton = this.logoutButton(header)
+            const logoutButton = Widgets.button(header, 'Logout')
             logoutButton.onclick = () => {
                 this.deleteAside(this.sideList, this.service.data.subjects)
+                this.table.main.hidden = true
                 this.displayPage('loginPageDiv')
             }
         parent.appendChild(header)
@@ -124,43 +135,8 @@ export class View {
         parent.appendChild(aside)
         return aside
     }
-    userInput (parent) {
-        const userInput = document.createElement('input')
-        userInput.className = 'userInput'
-        parent.appendChild(userInput)
-        return userInput
-    }
-    passInput (parent) {
-        const passInput = document.createElement('input')
-        passInput.className = 'passInput'
-        passInput.type = 'password'
-        parent.appendChild(passInput)
-        return passInput
-    }
-    backButton (parent) {
-        const backButton = document.createElement('button')
-        backButton.className = 'backButton'
-        backButton.innerHTML = 'Back'
-        parent.appendChild(backButton) 
-        return backButton        
-    }
-    submitButton (parent, text) {
-        const submitButton = document.createElement('button')
-        submitButton.className = 'submitButton'
-        submitButton.innerHTML = text
-        parent.appendChild(submitButton)
-        return submitButton
-    }
-    registerLink (parent) {
-        const registerLink = document.createElement('a')
-        registerLink.className = 'registerLink'
-        registerLink.innerHTML = 'Register'
-        parent.appendChild(registerLink)
-        return registerLink
-    }
     subjectDiv (parent, data) {
-        const subjectDiv = document.createElement('div')
-        subjectDiv.className = 'subjectDiv'
+        const subjectDiv = Widgets.div(parent, 'subjectDiv')
         subjectDiv.style.backgroundColor = data.color
         subjectDiv.id = data.text
             const text = document.createElement('span')
@@ -171,6 +147,7 @@ export class View {
 
             const deleteBox = this.deleteBox(subjectDiv)
             deleteBox.onclick = () => {
+                this.table.main.hidden = true
                 const newSubjects = this.service.data.subjects
                     .filter(subject => {
                             return subject.text != subjectDiv.id
@@ -180,15 +157,21 @@ export class View {
                 this.deleteAsideOne(parent, subjectDiv.id)
                 this.service.updateUser()
             }
-        parent.appendChild(subjectDiv)
+        subjectDiv.onclick = () => {
+            this.table.main.hidden = false
+            this.selectedSubject = subjectDiv
+            this.selectSubject(subjectDiv)
+            let subjectFromService = this.service.data.subjects
+                .filter(subject => subject.text == this.selectedSubject.id)
+            console.log(subjectFromService[0])
+            this.table.updateData(subjectFromService[0].scale)
+        }
         return subjectDiv
 
     }
     deleteBox (parent) {
-        const deleteBox = document.createElement('div')
-        deleteBox.className = 'deleteBox'
+        const deleteBox = Widgets.div(parent, 'deleteBox')
         deleteBox.innerHTML = 'x'
-        parent.appendChild(deleteBox)
         return deleteBox
     }
     updateAside (aside, data) {
@@ -216,28 +199,23 @@ export class View {
         }
     }
     subjectAddButton (parent) {
-        const subjectAddButton = document.createElement('div')
-        subjectAddButton.className = 'subjectAddButton'
+        const subjectAddButton = Widgets.div(parent, 'subjectAddButton')
             const text = document.createElement('span')
             text.className = 'text'
             text.style.color = 'white'
             text.innerHTML = '+'
             subjectAddButton.appendChild(text)
-        parent.appendChild(subjectAddButton)
         return subjectAddButton
     }
     subjectInput (parent) {
-        const subjectInput = document.createElement('div')
-        subjectInput.className = 'subjectInput'
-            const nameInput = document.createElement('input')
-            nameInput.className = 'nameInput'
-            subjectInput.appendChild(nameInput)
+        const subjectInput = Widgets.div(parent, 'subjectInput')
+            const nameInput = Widgets.input(subjectInput, 'text')
 
-            const colorPicker = this.colorPicker(subjectInput)
+            const colorPicker = Widgets.input(subjectInput, 'color')
 
-            const submitButton = this.submitButton(subjectInput, 'Submit subject')
+            const submitButton = Widgets.button(subjectInput, 'Submit subject')
             submitButton.onclick = () => {
-                const newInput = {text: nameInput.value, color: colorPicker.value}
+                const newInput = {text: nameInput.value, color: colorPicker.value, scale: this.table.getEmptyScale()}
                 this.service.data.subjects.push(newInput)
                 nameInput.value = ''
                 colorPicker.value = '#000000'
@@ -245,16 +223,17 @@ export class View {
                 this.service.updateUser()
                     .then(this.updateAsideOne(parent, newInput))
             }
-            const backButton = this.backButton(subjectInput)
-            backButton.onclick = () => subjectInput.hidden = true
-        parent.appendChild(subjectInput)
+            const cancelButton = Widgets.button(subjectInput, 'Cancel')
+            cancelButton.onclick = () => subjectInput.hidden = true
         return subjectInput
     }
-    colorPicker (parent) {
-        const colorPicker = document.createElement('input')
-        colorPicker.className = 'colorPicker'
-        colorPicker.setAttribute('type', 'color')
-        parent.appendChild(colorPicker)
-        return colorPicker
+    selectSubject(subject) {
+        document.querySelectorAll('.subjectDiv').forEach(subjectDiv => {
+            if (subjectDiv.id == subject.id) {
+                subjectDiv.style.border = '2px solid black'
+            } else {
+                subjectDiv.style.border = 'none'
+            }
+        })
     }
 }

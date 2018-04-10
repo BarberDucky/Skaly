@@ -1,5 +1,55 @@
 {
   "users": [
-    
+    {
+      "id": "damjan",
+      "password": "trt",
+      "subjects": [
+        {
+          "text": "tandara",
+          "color": "#ff8000",
+          "scale": {
+            "rows": 3,
+            "cols": 8,
+            "format": [
+              "XXXXXXXX",
+              "XXXXXXXX",
+              "XXXXXXXX"
+            ]
+          }
+        },
+        {
+          "text": "mandara",
+          "color": "#f7dc46",
+          "scale": {
+            "rows": 3,
+            "cols": 8,
+            "format": [
+              "XXXXXXXX",
+              "XXXXXXXX",
+              "XXXXXXXX"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "dare",
+      "password": "trt",
+      "subjects": [
+        {
+          "text": "trt",
+          "color": "#000000",
+          "scale": {
+            "rows": 3,
+            "cols": 8,
+            "format": [
+              "XXXXXXXX",
+              "XXXXXXXX",
+              "XXXXXXXX"
+            ]
+          }
+        }
+      ]
+    }
   ]
 }
