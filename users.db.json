@@ -5,28 +5,53 @@
       "password": "trt",
       "subjects": [
         {
-          "text": "trt",
+          "text": "asd",
           "color": "#000000",
           "scale": {
             "rows": 3,
             "cols": 10,
             "format": [
               "XXXXXXXXXX",
-              "XXXL+P+XXX",
+              "XXXXXXXXXX",
               "XXXXXXXXXX"
-            ]
-          }
-        },
-        {
-          "text": "mrt",
-          "color": "#000000",
-          "scale": {
-            "rows": 3,
-            "cols": 8,
-            "format": [
-              "XXXXXXXX",
-              "XXXXXXXX",
-              "XXXXXXXX"
+            ],
+            "points": [
+              [
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X"
+              ],
+              [
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X"
+              ],
+              [
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X"
+              ]
             ]
           }
         }
@@ -35,21 +60,7 @@
     {
       "id": "dare",
       "password": "trt",
-      "subjects": [
-        {
-          "text": "trt",
-          "color": "#000000",
-          "scale": {
-            "rows": 3,
-            "cols": 8,
-            "format": [
-              "XXXXXXXX",
-              "XXXXXXXX",
-              "XXXXXXXX"
-            ]
-          }
-        }
-      ]
+      "subjects": []
     }
   ]
 }

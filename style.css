@@ -70,6 +70,7 @@ aside {
     text-align: center;
 }
 .deleteBox {
+    z-index: 99;
     position: absolute;
     top: 0;
     right:0;
@@ -121,6 +122,13 @@ aside {
     flex-direction: row;
     align-items: stretch;
     height: 100%;
+}
+.contentHolder > .button {
+    border-radius: 50px;
+    height: 50px;
+    width: 50px;
+    background-color: blue;
+    color: white;
 }
 .tableMain {
         margin-left: auto;

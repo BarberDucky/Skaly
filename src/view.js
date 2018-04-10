@@ -101,14 +101,13 @@ export class View {
             this.sideList = aside
             this.table = new Table(contentHolder)
             this.table.main.hidden = true
-            const button = Widgets.button(contentHolder, 'push table')
+            const button = Widgets.button(contentHolder, 'Save table')
             button.onclick = () => {
                 this.service.data.subjects.map(subject => {
                     if (subject.text == this.selectedSubject.id) {
                         subject.scale = this.table.getData()
                     }
                 })
-                console.log(this.service.data)
                 this.service.updateUser()
             }
         return contentHolder
@@ -147,15 +146,14 @@ export class View {
 
             const deleteBox = this.deleteBox(subjectDiv)
             deleteBox.onclick = () => {
-                this.table.main.hidden = true
                 const newSubjects = this.service.data.subjects
                     .filter(subject => {
                             return subject.text != subjectDiv.id
                     })
-                console.log(newSubjects)
                 this.service.data.subjects = newSubjects
                 this.deleteAsideOne(parent, subjectDiv.id)
                 this.service.updateUser()
+                this.table.main.hidden = true
             }
         subjectDiv.onclick = () => {
             this.table.main.hidden = false
@@ -163,7 +161,6 @@ export class View {
             this.selectSubject(subjectDiv)
             let subjectFromService = this.service.data.subjects
                 .filter(subject => subject.text == this.selectedSubject.id)
-            console.log(subjectFromService[0])
             this.table.updateData(subjectFromService[0].scale)
         }
         return subjectDiv
@@ -215,18 +212,35 @@ export class View {
 
             const submitButton = Widgets.button(subjectInput, 'Submit subject')
             submitButton.onclick = () => {
-                const newInput = {text: nameInput.value, color: colorPicker.value, scale: this.table.getEmptyScale()}
-                this.service.data.subjects.push(newInput)
-                nameInput.value = ''
-                colorPicker.value = '#000000'
-                subjectInput.hidden = true
-                this.service.updateUser()
-                    .then(this.updateAsideOne(parent, newInput))
+                if (nameInput != '' && !this.checkDuplicate(nameInput)) {
+                    const newInput = {
+                        text: nameInput.value, 
+                        color: colorPicker.value,
+                        scale: this.table.getEmptyScale()
+                    }
+                    this.service.data.subjects.push(newInput)
+                    nameInput.value = ''
+                    colorPicker.value = '#000000'
+                    subjectInput.hidden = true
+                    this.service.updateUser()
+                        .then(this.updateAsideOne(parent, newInput))
+                } else {
+                    alert ('Pogresan unos')
+                }
             }
             const cancelButton = Widgets.button(subjectInput, 'Cancel')
             cancelButton.onclick = () => subjectInput.hidden = true
         return subjectInput
     }
+    checkDuplicate(text) {
+        let duplicates = this.service.data.subjects.filter(subject => subject.text == text)
+        console.log(duplicates)
+        if (duplicates.count == 0) {
+            return false
+        } else {
+            return true
+        }
+    } 
     selectSubject(subject) {
         document.querySelectorAll('.subjectDiv').forEach(subjectDiv => {
             if (subjectDiv.id == subject.id) {
