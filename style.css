@@ -1,7 +1,6 @@
 html, body, #main {
     height: 100%;
     width: 100%;
-    overflow: hidden;
     margin: 0;
 }
 .loginPageDiv {
@@ -46,6 +45,9 @@ html, body, #main {
 header {
     height: 50px;
     background-color: blue;
+}
+header .button {
+    float: right;
 }
 aside {
     height: 100%;

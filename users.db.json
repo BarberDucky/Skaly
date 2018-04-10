@@ -1,66 +1,6 @@
 {
   "users": [
-    {
-      "id": "damjan",
-      "password": "trt",
-      "subjects": [
-        {
-          "text": "asd",
-          "color": "#000000",
-          "scale": {
-            "rows": 3,
-            "cols": 10,
-            "format": [
-              "XXXXXXXXXX",
-              "XXXXXXXXXX",
-              "XXXXXXXXXX"
-            ],
-            "points": [
-              [
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X"
-              ],
-              [
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X"
-              ],
-              [
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X"
-              ]
-            ]
-          }
-        }
-      ]
-    },
-    {
-      "id": "dare",
-      "password": "trt",
-      "subjects": []
-    }
+    
+      
   ]
 }
