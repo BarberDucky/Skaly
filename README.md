@@ -26,8 +26,6 @@ Tabela i poeni se cuvaju u bazi pritiskom na dugme 'Save', inace se izmene brisu
 - Tabela je <table> html element i velicina polja se odredjuje preko 
 column-span atributa. Zbog toga ce da se poremeti raspored ako u sve tri
 skale postoji po jedan prosiren element u istoj vertikalnoj osi
-- Broj osvojenih poena se ne azurira pri odabiru drugog predmeta, ili korisnika,
-vec je potrebno osvezavanje pritiskom na dugme 'Calculate'
 - Pri brisanju predmeta je skala i dalje prikazana (ne utice na ostale podatke)
 
 ### KOZMETICKI NEDOSTACI: 
