@@ -147,7 +147,7 @@ export class View {
         subjectDiv.appendChild(text)
 
         const deleteBox = this.deleteBox(subjectDiv)
-        deleteBox.onclick = () => {
+        deleteBox.onclick = (e) => {
             const newSubjects = this.service.data.subjects
                 .filter(subject => {
                     return subject.text != subjectDiv.id
@@ -156,6 +156,7 @@ export class View {
             this.deleteAsideOne(parent, subjectDiv.id)
             this.service.updateUser()
             this.table.main.hidden = true
+            e.cancelBubble = true
         }
         subjectDiv.onclick = () => {
             this.table.main.hidden = false
