@@ -2,7 +2,7 @@ import Selector from './selector'
 import Widgets from './widgets'
 
 export default class Table {
-    constructor (parent) {
+    constructor(parent) {
         this.main = document.createElement('div')
         this.main.className = 'tableMain'
         this.table = []
@@ -79,7 +79,7 @@ export default class Table {
                     let oldSpan = parseInt(last.colSpan)
                     last.colSpan = `${oldSpan + 1}`
                     this.table[i][j].code = ''
-                    this.table[i][j].points = 0 
+                    this.table[i][j].points = 0
                     last.code += '+'
                     last.history.push('hide')
                     this.table[i][j].data = null
@@ -88,11 +88,11 @@ export default class Table {
                     this.table[i][j].history = []
                 }
             }
-        }     
+        }
     }
     createTable(parent) {
         const tableDiv = document.createElement('table')
-        for(let i = 0; i < 3; i++){
+        for (let i = 0; i < 3; i++) {
             this.rows[i] = document.createElement('tr')
             this.rows[i].id = `row${i}`
             tableDiv.appendChild(this.rows[i])
@@ -105,7 +105,7 @@ export default class Table {
                 newCell.draggable = false
                 this.createText(newCell)
                 newCell.controls = this.addControls(newCell, i, j)
-                newCell.onclick = () => {   
+                newCell.onclick = () => {
                     newCell.controls.forEach(control => {
                         control.hidden = !control.hidden
                     })
@@ -135,7 +135,7 @@ export default class Table {
                         this.updateBox(newCell, true)
                         newCell.draggable = false
                         newCell.points = 0
-                        this.selectedInput.hidden = true     
+                        this.selectedInput.hidden = true
                     }
                 }
                 this.table[i][j] = newCell
@@ -146,10 +146,10 @@ export default class Table {
         return tableDiv
     }
 
-    generateFormat() {   
+    generateFormat() {
         let format = []
         let points = []
-        for(let i = 0; i < this.table.length; i++) {
+        for (let i = 0; i < this.table.length; i++) {
             format[i] = ''
             points[i] = []
             for (let j = 0; j < this.table[i].length; j++) {
@@ -174,10 +174,10 @@ export default class Table {
         const outBoxLeft = document.createElement('div')
         outBoxLeft.className = 'outBoxLeft'
         outBoxLeft.onclick = () => {
-            if(x != this.table[0].length-1) {
+            if (x != this.table[0].length - 1) {
                 let a = x
                 let b = y + 1
-                while (b < this.table[a].length && this.table[a][b].hidden == true ) {
+                while (b < this.table[a].length && this.table[a][b].hidden == true) {
                     b++
                 }
                 let nextElement = this.table[a][b]
@@ -186,21 +186,27 @@ export default class Table {
                     if (nextElement.colSpan == '1') {
                         nextElement.hidden = true
                         nextElement.code = ''
-                        parent.history.push({oper:'hide', target: nextElement})
+                        parent.history.push({
+                            oper: 'hide',
+                            target: nextElement
+                        })
                     } else {
                         let oldSpanNext = parseInt(nextElement.colSpan)
                         nextElement.colSpan = `${oldSpanNext - 1}`
                         if (nextElement.points) {
-                            nextElement.points = (((oldSpanNext-1) * nextElement.points) / oldSpanNext).toFixed(2)
+                            nextElement.points = (((oldSpanNext - 1) * nextElement.points) / oldSpanNext).toFixed(2)
                             nextElement.lowerText.innerHTML = nextElement.points
                         }
                         nextElement.code = nextElement.code.slice(0, -1)
-                        parent.history.push({oper:'borrow', target: nextElement})
+                        parent.history.push({
+                            oper: 'borrow',
+                            target: nextElement
+                        })
                     }
                     this.table[x][y].colSpan = `${oldSpan+1}`
                     this.table[x][y].code += '+'
                     if (this.table[x][y].points) {
-                        this.table[x][y].points = (((oldSpan+1) * this.table[x][y].points) / oldSpan).toFixed(2)
+                        this.table[x][y].points = (((oldSpan + 1) * this.table[x][y].points) / oldSpan).toFixed(2)
                         this.table[x][y].lowerText.innerHTML = this.table[x][y].points
                     }
                 }
@@ -212,7 +218,7 @@ export default class Table {
         const inBoxLeft = document.createElement('div')
         inBoxLeft.className = 'inBoxLeft'
         inBoxLeft.onclick = () => {
-            if(parent.colSpan != '1') {
+            if (parent.colSpan != '1') {
                 oldSpan = parseInt(this.table[x][y].colSpan)
                 let lastMove = parent.history.pop()
                 if (lastMove.oper == 'hide') {
@@ -227,7 +233,7 @@ export default class Table {
                     lastMove.target.colSpan = `${oldSpanNext + 1}`
                     lastMove.target.code += '+'
                     if (lastMove.target.points) {
-                        lastMove.target.points = (((oldSpanNext+1) * lastMove.target.points) / oldSpanNext).toFixed(2)
+                        lastMove.target.points = (((oldSpanNext + 1) * lastMove.target.points) / oldSpanNext).toFixed(2)
                         lastMove.target.lowerText.innerHTML = lastMove.target.points
                     }
                 } else {
@@ -242,7 +248,7 @@ export default class Table {
                 this.table[x][y].colSpan = `${oldSpan - 1}`
                 this.table[x][y].code = this.table[x][y].code.slice(0, -1)
                 if (this.table[x][y].points) {
-                    this.table[x][y].points = (((oldSpan-1) * this.table[x][y].points) / oldSpan).toFixed(2)
+                    this.table[x][y].points = (((oldSpan - 1) * this.table[x][y].points) / oldSpan).toFixed(2)
                     this.table[x][y].lowerText.innerHTML = this.table[x][y].points
                 }
             }
@@ -258,7 +264,7 @@ export default class Table {
         parent.upperText = upperText
         upperText.className = 'upperText'
         parent.appendChild(upperText)
-        
+
         const lowerText = document.createElement('div')
         parent.lowerText = lowerText
         lowerText.className = 'lowerText'
@@ -266,7 +272,7 @@ export default class Table {
     }
 
     updateBox(element, reset) {
-        if (!reset) { 
+        if (!reset) {
             element.style.color = element.data.color
             element.style.borderColor = element.data.color
             element.upperText.innerHTML = element.data.text[0]
@@ -281,57 +287,55 @@ export default class Table {
     }
     createInput(parent) {
         const pointDiv = Widgets.div(parent, 'pointDiv')
-            const pointInput = Widgets.input(pointDiv, 'text')
-            const maxInput = Widgets.input(pointDiv, 'text')
-            const submitButton = Widgets.button(pointDiv, 'Submit')
-            const cancelButton = Widgets.button(pointDiv, 'Cancel')
-            pointDiv.hidden = true
-            submitButton.onclick = () => {
-                if (this.selectedBox.data) {
-                    let colSpan = parseInt(this.selectedBox.colSpan)
-                    let point = parseInt(pointInput.value)
-                    let max = parseInt(maxInput.value)
-                    if(!isNaN(point) && !isNaN(max) && max >= point){
-                        this.selectedBox.points = (((point * 100 / max) / 100) * 10 * colSpan).toFixed(2)
-                        this.selectedBox.lowerText.innerHTML = this.selectedBox.points
-                        pointDiv.hidden = true
-                        pointInput.value = ''
-                        maxInput.value = ''
-                    } else {
-                        alert('invalid input')
-                    }
-                } else {
+        const pointInput = Widgets.input(pointDiv, 'text')
+        const maxInput = Widgets.input(pointDiv, 'text')
+        const submitButton = Widgets.button(pointDiv, 'Submit')
+        const cancelButton = Widgets.button(pointDiv, 'Cancel')
+        pointDiv.hidden = true
+        submitButton.onclick = () => {
+            if (this.selectedBox.data) {
+                let colSpan = parseInt(this.selectedBox.colSpan)
+                let point = parseInt(pointInput.value)
+                let max = parseInt(maxInput.value)
+                if (!isNaN(point) && !isNaN(max) && max >= point) {
+                    this.selectedBox.points = (((point * 100 / max) / 100) * 10 * colSpan).toFixed(2)
+                    this.selectedBox.lowerText.innerHTML = this.selectedBox.points
                     pointDiv.hidden = true
                     pointInput.value = ''
                     maxInput.value = ''
+                } else {
+                    alert('invalid input')
                 }
-            }
-            cancelButton.onclick = () => {
+            } else {
                 pointDiv.hidden = true
+                pointInput.value = ''
+                maxInput.value = ''
             }
+        }
+        cancelButton.onclick = () => {
+            pointDiv.hidden = true
+        }
         return pointDiv
     }
     createCalculation(parent) {
         const calcDiv = Widgets.div(parent, 'calcDiv')
-            const markDiv = Widgets.div(calcDiv, 'markDiv')
-            const calcButton = Widgets.button(calcDiv, 'Calculate')
-            calcButton.onclick = () => {
-                let max = 0
-                for(let i = 0; i < this.table.length; i++) {
-                    let rowValue = 0
-                    for (let j = 0; j < this.table[i].length; j++) {
-                        if (this.table[i][j].points && !this.table[i][j].hidden) {
-                            rowValue += parseInt(this.table[i][j].points)
-                        }
-                    }
-                    if (rowValue > max) {
-                        max = rowValue
+        const markDiv = Widgets.div(calcDiv, 'markDiv')
+        const calcButton = Widgets.button(calcDiv, 'Calculate')
+        calcButton.onclick = () => {
+            let max = 0
+            for (let i = 0; i < this.table.length; i++) {
+                let rowValue = 0
+                for (let j = 0; j < this.table[i].length; j++) {
+                    if (this.table[i][j].points && !this.table[i][j].hidden) {
+                        rowValue += parseInt(this.table[i][j].points)
                     }
                 }
-                markDiv.innerHTML = `Osvojeno poena: ${max}`
+                if (rowValue > max) {
+                    max = rowValue
+                }
             }
+            markDiv.innerHTML = `Osvojeno poena: ${max}`
+        }
         return calcDiv
     }
 }
-
-

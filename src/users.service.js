@@ -1,8 +1,8 @@
 export class UsersService {
-    constructor () {
+    constructor() {
         this.data = {}
     }
-    addUser (credentials) {
+    addUser(credentials) {
         if (!credentials.id || !credentials.password) {
             alert('Input username and password')
             return Promise.reject()
@@ -16,19 +16,18 @@ export class UsersService {
                     } else {
                         credentials.subjects = []
                         fetch('http://localhost:3000/users', {
-                            method: 'POST', 
-                            body: JSON.stringify(credentials), 
-                            headers: new Headers({
-                                'Content-Type': 'application/json'
+                                method: 'POST',
+                                body: JSON.stringify(credentials),
+                                headers: new Headers({
+                                    'Content-Type': 'application/json'
+                                })
                             })
-                        })
                             .then(() => alert('Successful registration'))
                     }
-                }
-            )
+                })
         }
     }
-    checkUser (credentials) {
+    checkUser(credentials) {
         if (!credentials.id || !credentials.password) {
             alert('Input username and password')
             return Promise.reject()
@@ -43,21 +42,20 @@ export class UsersService {
                         alert('Successful login')
                         return Promise.resolve(res[0])
                     }
-                }
-            )
+                })
         }
     }
-    setData (data) {
+    setData(data) {
         this.data = data
         return new Promise((resolve, reject) => resolve(data))
     }
-    updateUser () {
+    updateUser() {
         return fetch(`http://localhost:3000/users/${this.data.id}`, {
-            method: 'PUT', 
-            body: JSON.stringify(this.data), 
+            method: 'PUT',
+            body: JSON.stringify(this.data),
             headers: new Headers({
                 'Content-Type': 'application/json'
             })
         })
-    } 
+    }
 }

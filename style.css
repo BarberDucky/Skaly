@@ -1,8 +1,11 @@
-html, body, #main {
+html,
+body,
+#main {
     height: 100%;
     width: 100%;
     margin: 0;
 }
+
 .loginPageDiv {
     display: flex;
     flex-direction: column;
@@ -15,6 +18,7 @@ html, body, #main {
     padding: 50px;
     margin: auto;
 }
+
 .regPageDiv {
     display: flex;
     flex-direction: column;
@@ -25,15 +29,16 @@ html, body, #main {
     border: 4px dashed blue;
     border-radius: 20px;
     padding: 50px;
-    margin: auto;  
+    margin: auto;
 }
-.loginPageDiv > .input {
+
+.loginPageDiv>.input {
     text-align: center;
     padding: 15px;
     font-size: 20px;
 }
 
-.loginPageDiv > .button {
+.loginPageDiv>.button {
     color: white;
     font-size: 20px;
     background-color: blue;
@@ -46,9 +51,11 @@ header {
     height: 50px;
     background-color: blue;
 }
+
 header .button {
     float: right;
 }
+
 aside {
     height: 100%;
     width: 250px;
@@ -58,6 +65,7 @@ aside {
     border-right: 1px solid grey;
     overflow-y: scroll;
 }
+
 .subjectDiv {
     position: relative;
     cursor: pointer;
@@ -71,11 +79,12 @@ aside {
     justify-content: center;
     text-align: center;
 }
+
 .deleteBox {
     z-index: 99;
     position: absolute;
     top: 0;
-    right:0;
+    right: 0;
     height: 20px;
     width: 20px;
     color: white;
@@ -85,6 +94,7 @@ aside {
     font-family: "Century Gothic", CenturyGothic, Geneva, AppleGothic, sans-serif;
     background-color: red;
 }
+
 .subjectAddButton {
     min-height: 50px;
     height: 50px;
@@ -98,10 +108,12 @@ aside {
     cursor: pointer;
     background-color: blue;
 }
+
 .text {
     font-size: 30px;
     font-family: "Century Gothic", CenturyGothic, Geneva, AppleGothic, sans-serif;
 }
+
 .subjectInput {
     min-height: 200px;
     order: 98;
@@ -115,9 +127,11 @@ aside {
     margin: 10px;
     border: 1px solid black;
 }
-[hidden] { 
-    display: none !important; 
+
+[hidden] {
+    display: none !important;
 }
+
 .contentHolder {
     display: flex;
     overflow: hidden;
@@ -125,74 +139,81 @@ aside {
     align-items: stretch;
     height: 100%;
 }
-.contentHolder > .button {
+
+.contentHolder>.button {
     border-radius: 50px;
     height: 50px;
     width: 50px;
     background-color: blue;
     color: white;
 }
+
 .tableMain {
-        margin-left: auto;
-        margin-right: auto;
-        display: flex;
-        flex-direction: column; 
-        align-items: center;
-    }
-    table {
-        border: 4px dashed grey;
-        border-radius: 20px;
-        padding: 15px;
-        margin: 10px;
-        width: fit-content;
-    }
-    td {
-        position: relative;
-        height: 70px;
-        width: 70px;
-        border-radius: 10px;
-        border: 2px solid slateblue;
-        text-align: center;
-        font-size: 20px;
-    }
-    .selector {
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-        border: 4px dashed grey;
-        border-radius: 20px;
-        padding: 15px;
-        margin: 10px;
-        width: auto;
-    }
-    .assignDiv {
-        
-        margin-left:5px;
-        margin-right:5px;
-        height: 70px;
-        width: 70px;
-        border-radius: 10px;
-        border: 2px solid;
-        font-size: 20px;
-        text-align: center;
-        display: flex;
-        flex-direction: column;
-    }
-    .inBoxLeft {
-        position: absolute;
-        height: 15px;
-        width: 15px;
-        background-color: red;
-        right: 0px;
-        top: 10px;
-        border-radius: 10px;
-    }
-    .outBoxLeft {
-        position: absolute;
-        height: 15px;
-        width: 15px;
-        background-color: green;
-        right: 0px;
-        bottom: 10px;
-        border-radius: 10px;
-    }
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+table {
+    border: 4px dashed grey;
+    border-radius: 20px;
+    padding: 15px;
+    margin: 10px;
+    width: fit-content;
+}
+
+td {
+    position: relative;
+    height: 70px;
+    width: 70px;
+    border-radius: 10px;
+    border: 2px solid slateblue;
+    text-align: center;
+    font-size: 20px;
+}
+
+.selector {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border: 4px dashed grey;
+    border-radius: 20px;
+    padding: 15px;
+    margin: 10px;
+    width: auto;
+}
+
+.assignDiv {
+    margin-left: 5px;
+    margin-right: 5px;
+    height: 70px;
+    width: 70px;
+    border-radius: 10px;
+    border: 2px solid;
+    font-size: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.inBoxLeft {
+    position: absolute;
+    height: 15px;
+    width: 15px;
+    background-color: red;
+    right: 0px;
+    top: 10px;
+    border-radius: 10px;
+}
+
+.outBoxLeft {
+    position: absolute;
+    height: 15px;
+    width: 15px;
+    background-color: green;
+    right: 0px;
+    bottom: 10px;
+    border-radius: 10px;
+}
