@@ -12,6 +12,7 @@ export default class Table {
         this.selector = new Selector(this.main)
         this.tableDiv = this.createTable(this.main)
         this.selectedInput = this.createInput(this.main)
+        this.caluclateText = this.createCalculateText(this.main)
         this.calculateButton = this.createCalculation(this.main)
 
         parent.appendChild(this.main)
@@ -107,7 +108,7 @@ export default class Table {
                 newCell.controls = this.addControls(newCell, i, j)
                 newCell.onclick = () => {
                     const prevState = newCell.controls.hidden
-                    this.deselectAll()
+                    this.deselectControls()
                     newCell.controls.hidden = !prevState
                 }
                 newCell.ondblclick = () => {
@@ -316,10 +317,12 @@ export default class Table {
         }
         return pointDiv
     }
+    createCalculateText(parent) {
+        const text = Widgets.div(parent, 'markDiv')
+        return text
+    }
     createCalculation(parent) {
-        const calcDiv = Widgets.div(parent, 'calcDiv')
-        const markDiv = Widgets.div(calcDiv, 'markDiv')
-        const calcButton = Widgets.button(calcDiv, 'Calculate')
+        const calcButton = Widgets.button(parent, 'Calculate')
         calcButton.onclick = () => {
             let max = 0
             for (let i = 0; i < this.table.length; i++) {
@@ -333,15 +336,21 @@ export default class Table {
                     max = rowValue
                 }
             }
-            markDiv.innerHTML = `Osvojeno poena: ${max}`
+            this.caluclateText.hidden = false
+            this.caluclateText.innerHTML = `Osvojeno poena: ${max}`
         }
-        return calcDiv
+        return calcButton
     }
-    deselectAll() {
+    deselectControls() {
         for (let i = 0; i < this.table.length; i++) {
             for (let j = 0; j < this.table[i].length; j++) {
                 this.table[i][j].controls.hidden = true
             }
         }
+    }
+    deselectAll() {
+        this.deselectControls()
+        this.selectedInput.hidden = true
+        this.caluclateText.hidden = true
     }
 }
