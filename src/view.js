@@ -236,8 +236,7 @@ export class View {
     }
     checkDuplicate(text) {
         let duplicates = this.service.data.subjects.filter(subject => subject.text == text)
-        console.log(duplicates)
-        if (duplicates.count == 0) {
+        if (duplicates.length == 0) {
             return false
         } else {
             return true
