@@ -9,7 +9,6 @@ export class View {
         this.service = new UsersService
         this.sideList = {}
         this.selectedSubject = {}
-        this.last = {}
         this.table = {}
         this.mainDiv = document.getElementById('main')
         this.mainDiv.registerPage = this.renderRegister(this.mainDiv)

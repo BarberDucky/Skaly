@@ -3,8 +3,8 @@ import Widgets from './widgets'
 
 export default class Table {
     constructor(parent) {
-        this.main = document.createElement('div')
-        this.main.className = 'tableMain'
+        this.main = Widgets.div(parent, 'tableMain')
+
         this.table = []
         this.selectedBox = {}
 
@@ -13,8 +13,6 @@ export default class Table {
         this.selectedInput = this.createInput(this.main)
         this.caluclateText = this.createCalculateText(this.main)
         this.calculateButton = this.createCalculateButton(this.main)
-
-        parent.appendChild(this.main)
     }
     getData() {
         let generated = this.generateFormat()
