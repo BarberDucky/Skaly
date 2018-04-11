@@ -215,7 +215,7 @@ export class View {
 
         const submitButton = Widgets.button(subjectInput, 'Submit subject')
         submitButton.onclick = () => {
-            if (nameInput != '' && !this.checkDuplicate(nameInput)) {
+            if (nameInput.value != '' && !this.checkDuplicate(nameInput)) {
                 const newInput = {
                     text: nameInput.value,
                     color: colorPicker.value,
