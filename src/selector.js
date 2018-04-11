@@ -1,29 +1,31 @@
+import Widgets from './widgets'
 export default class Selector {
-    constructor (parent) {
+    constructor(parent) {
         this.assignments = [{
-            text: 'Kolok',
-            color: '#b200ff'
-        },
-        {
-            text: 'Ispit',
-            color: 'green'
-        },
-        {
-            text: 'Lab',
-            color: 'red'
-        },
-        {
-            text: 'Projekat',
-            color: 'orange'
-        },
-        {
-            text: 'Domaci',
-            color: 'yellow'
-        },
-        {
-            text: 'Ostalo',
-            color: 'blue'
-        }]
+                text: 'Kolok',
+                color: '#b200ff'
+            },
+            {
+                text: 'Ispit',
+                color: 'green'
+            },
+            {
+                text: 'Lab',
+                color: 'red'
+            },
+            {
+                text: 'Projekat',
+                color: 'orange'
+            },
+            {
+                text: 'Domaci',
+                color: 'yellow'
+            },
+            {
+                text: 'Ostalo',
+                color: 'blue'
+            }
+        ]
         this.selector = this.createSelector(parent)
     }
     getSelector() {
@@ -37,16 +39,13 @@ export default class Selector {
         return assignment[0]
     }
     createSelector(parent) {
-        const selector = document.createElement('div')
-        selector.className = 'selector'
+        const selector = Widgets.div(parent, 'selector')
         selector.array = this.createAssignments(selector)
-        parent.appendChild(selector)
         return selector
     }
     createAssignments(parent) {
         const assignments = this.assignments.map(assign => {
-            const assignDiv = document.createElement('div')
-            assignDiv.className = 'assignDiv'
+            const assignDiv = Widgets.div(parent, 'assignDiv')
             assignDiv.id = assign.text
             assignDiv.innerHTML = `${assign.text[0]} </br> ${assign.text}`
             assignDiv.style.color = assign.color
@@ -55,11 +54,7 @@ export default class Selector {
             assignDiv.ondragstart = (ev) => {
                 ev.dataTransfer.setData('application/json', JSON.stringify(assignDiv.assign))
             }
-            parent.appendChild(assignDiv)
             return assignDiv
         })
     }
 }
-
-
-

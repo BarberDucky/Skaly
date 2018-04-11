@@ -6,14 +6,13 @@ export default class Table {
         this.main = document.createElement('div')
         this.main.className = 'tableMain'
         this.table = []
-        this.rows = []
         this.selectedBox = {}
 
         this.selector = new Selector(this.main)
-        this.tableDiv = this.createTable(this.main)
+        this.tableDiv = this.createTable(this.main, 3, 10)
         this.selectedInput = this.createInput(this.main)
         this.caluclateText = this.createCalculateText(this.main)
-        this.calculateButton = this.createCalculation(this.main)
+        this.calculateButton = this.createCalculateButton(this.main)
 
         parent.appendChild(this.main)
     }
@@ -91,62 +90,65 @@ export default class Table {
             }
         }
     }
-    createTable(parent) {
+    createTable(parent, rowNum, colNum) {
         const tableDiv = document.createElement('table')
-        for (let i = 0; i < 3; i++) {
-            this.rows[i] = document.createElement('tr')
-            this.rows[i].id = `row${i}`
-            tableDiv.appendChild(this.rows[i])
+        let row = {}
+        for (let i = 0; i < rowNum; i++) {
+            row = document.createElement('tr')
             this.table[i] = []
-            for (let j = 0; j < 10; j++) {
-                const newCell = document.createElement('td')
-                newCell.id = `cell${i}${j}`
-                newCell.history = []
-                newCell.code = 'X'
-                newCell.draggable = false
-                this.createText(newCell)
-                newCell.controls = this.addControls(newCell, i, j)
-                newCell.onclick = () => {
-                    const prevState = newCell.controls.hidden
-                    this.deselectControls()
-                    newCell.controls.hidden = !prevState
-                }
-                newCell.ondblclick = () => {
-                    if (newCell.data) {
-                        this.selectedBox = newCell
-                        this.selectedInput.hidden = false
-                    }
-                }
-                newCell.ondragover = (ev) => {
-                    ev.preventDefault()
-                }
-                newCell.ondrop = (ev) => {
-                    ev.preventDefault()
-                    const cellData = JSON.parse(ev.dataTransfer.getData('application/json'))
-                    newCell.data = cellData
-                    this.updateBox(newCell, false)
-                    newCell.code = `${cellData.text[0]}${newCell.code.slice(1)}`
-                    newCell.draggable = true
-                    newCell.ondragstart = (ev) => {
-                        ev.dataTransfer.setData('application/json', JSON.stringify(newCell.data))
-                    }
-                    newCell.ondragend = (ev) => {
-                        newCell.data = null
-                        newCell.code = `X${newCell.code.slice(1)}`
-                        this.updateBox(newCell, true)
-                        newCell.draggable = false
-                        newCell.points = 0
-                        this.selectedInput.hidden = true
-                    }
-                }
-                this.table[i][j] = newCell
-                this.rows[i].appendChild(this.table[i][j])
+            for (let j = 0; j < colNum; j++) {
+                this.table[i][j] = this.createCell(i, j)
+                row.appendChild(this.table[i][j])
             }
+            tableDiv.appendChild(row)
         }
         parent.appendChild(tableDiv)
         return tableDiv
     }
-
+    createCell(i, j) {
+        const newCell = document.createElement('td')
+        newCell.id = `cell${i}${j}`
+        newCell.history = []
+        newCell.code = 'X'
+        newCell.draggable = false
+        newCell.upperText = Widgets.div(newCell, 'upperText')
+        newCell.lowerText = Widgets.div(newCell, 'lowerText')
+        newCell.controls = this.addControls(newCell, i, j)
+        newCell.onclick = () => {
+            const prevState = newCell.controls.hidden
+            this.deselectControls()
+            newCell.controls.hidden = !prevState
+        }
+        newCell.ondblclick = () => {
+            if (newCell.data) {
+                this.selectedBox = newCell
+                this.selectedInput.hidden = false
+            }
+        }
+        newCell.ondragover = (ev) => {
+            ev.preventDefault()
+        }
+        newCell.ondrop = (ev) => {
+            ev.preventDefault()
+            const cellData = JSON.parse(ev.dataTransfer.getData('application/json'))
+            newCell.data = cellData
+            this.updateBox(newCell, false)
+            newCell.code = `${cellData.text[0]}${newCell.code.slice(1)}`
+            newCell.draggable = true
+            newCell.ondragstart = (ev) => {
+                ev.dataTransfer.setData('application/json', JSON.stringify(newCell.data))
+            }
+            newCell.ondragend = (ev) => {
+                newCell.data = null
+                newCell.code = `X${newCell.code.slice(1)}`
+                this.updateBox(newCell, true)
+                newCell.draggable = false
+                newCell.points = 0
+                this.selectedInput.hidden = true
+            }
+        }
+        return newCell
+    }
     generateFormat() {
         let format = []
         let points = []
@@ -258,19 +260,6 @@ export default class Table {
         controlsDiv.hidden = true
         return controlsDiv
     }
-
-    createText(parent) {
-        const upperText = document.createElement('div')
-        parent.upperText = upperText
-        upperText.className = 'upperText'
-        parent.appendChild(upperText)
-
-        const lowerText = document.createElement('div')
-        parent.lowerText = lowerText
-        lowerText.className = 'lowerText'
-        parent.appendChild(lowerText)
-    }
-
     updateBox(element, reset) {
         if (!reset) {
             element.style.color = element.data.color
@@ -321,7 +310,7 @@ export default class Table {
         const text = Widgets.div(parent, 'markDiv')
         return text
     }
-    createCalculation(parent) {
+    createCalculateButton(parent) {
         const calcButton = Widgets.button(parent, 'Calculate')
         calcButton.onclick = () => {
             let max = 0
