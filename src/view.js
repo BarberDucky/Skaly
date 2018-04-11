@@ -159,6 +159,7 @@ export class View {
         }
         subjectDiv.onclick = () => {
             this.table.main.hidden = false
+            this.table.deselectAll()
             this.selectedSubject = subjectDiv
             this.selectSubject(subjectDiv)
             let subjectFromService = this.service.data.subjects

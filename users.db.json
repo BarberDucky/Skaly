@@ -11,6 +11,57 @@
             "rows": 3,
             "cols": 10,
             "format": [
+              "XXX+XXXXXX",
+              "XXXXXXXXXX",
+              "XXXXXXXXXX"
+            ],
+            "points": [
+              [
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X"
+              ],
+              [
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X"
+              ],
+              [
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X"
+              ]
+            ]
+          }
+        },
+        {
+          "text": "rtr",
+          "color": "#000000",
+          "scale": {
+            "rows": 3,
+            "cols": 10,
+            "format": [
               "XXXXXXXXXX",
               "XXXXXXXXXX",
               "XXXXXXXXXX"

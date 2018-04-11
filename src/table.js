@@ -106,9 +106,9 @@ export default class Table {
                 this.createText(newCell)
                 newCell.controls = this.addControls(newCell, i, j)
                 newCell.onclick = () => {
-                    newCell.controls.forEach(control => {
-                        control.hidden = !control.hidden
-                    })
+                    const prevState = newCell.controls.hidden
+                    this.deselectAll()
+                    newCell.controls.hidden = !prevState
                 }
                 newCell.ondblclick = () => {
                     if (newCell.data) {
@@ -171,6 +171,7 @@ export default class Table {
 
     addControls(parent, x, y) {
         let oldSpan = {}
+        const controlsDiv = Widgets.div(parent, 'controlsDiv')
         const outBoxLeft = document.createElement('div')
         outBoxLeft.className = 'outBoxLeft'
         outBoxLeft.onclick = () => {
@@ -212,8 +213,7 @@ export default class Table {
                 }
             }
         }
-        outBoxLeft.hidden = true
-        parent.appendChild(outBoxLeft)
+        controlsDiv.appendChild(outBoxLeft)
 
         const inBoxLeft = document.createElement('div')
         inBoxLeft.className = 'inBoxLeft'
@@ -253,10 +253,9 @@ export default class Table {
                 }
             }
         }
-        inBoxLeft.hidden = true
-        parent.appendChild(inBoxLeft)
-
-        return [outBoxLeft, inBoxLeft]
+        controlsDiv.appendChild(inBoxLeft)
+        controlsDiv.hidden = true
+        return controlsDiv
     }
 
     createText(parent) {
@@ -337,5 +336,12 @@ export default class Table {
             markDiv.innerHTML = `Osvojeno poena: ${max}`
         }
         return calcDiv
+    }
+    deselectAll() {
+        for (let i = 0; i < this.table.length; i++) {
+            for (let j = 0; j < this.table[i].length; j++) {
+                this.table[i][j].controls.hidden = true
+            }
+        }
     }
 }
