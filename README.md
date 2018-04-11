@@ -29,8 +29,6 @@ skale postoji po jedan prosiren element u istoj vertikalnoj osi
 - Broj osvojenih poena se ne azurira pri odabiru drugog predmeta, ili korisnika,
 vec je potrebno osvezavanje pritiskom na dugme 'Calculate'
 - Pri brisanju predmeta je skala i dalje prikazana (ne utice na ostale podatke)
-- Klikom na jedno polje se prikazuju njegove kontrole za velicinu, ali se ne
-kriju za ostala polja
 
 ### KOZMETICKI NEDOSTACI: 
 - Forme nemaju labele kod inputa
