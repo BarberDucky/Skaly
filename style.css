@@ -198,7 +198,7 @@ td {
     flex-direction: column;
 }
 
-.inBoxLeft {
+.reduceControl {
     position: absolute;
     height: 15px;
     width: 15px;
@@ -208,7 +208,7 @@ td {
     border-radius: 10px;
 }
 
-.outBoxLeft {
+.enlargeControl {
     position: absolute;
     height: 15px;
     width: 15px;

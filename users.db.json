@@ -2,17 +2,107 @@
   "users": [
     {
       "id": "damjan",
-      "password": "trt",
+      "password": "asd",
       "subjects": [
         {
+          "text": "asd",
+          "color": "#000000",
+          "scale": {
+            "rows": 3,
+            "cols": 10,
+            "format": [
+              "XKIIXXXXXX",
+              "XXK+XXXXXX",
+              "XXXXXXXXXX"
+            ],
+            "points": [
+              [
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X"
+              ],
+              [
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X"
+              ],
+              [
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X"
+              ]
+            ]
+          }
+        },
+        {
+          "text": "asdd",
           "color": "#000000",
           "scale": {
             "rows": 3,
             "cols": 10,
             "format": [
               "XXXXXXXXXX",
-              "XXXXXXXXXX",
+              "XXIXXXXXXX",
               "XXXXXXXXXX"
+            ],
+            "points": [
+              [
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X"
+              ],
+              [
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X"
+              ],
+              [
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X"
+              ]
             ]
           }
         }
