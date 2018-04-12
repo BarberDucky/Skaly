@@ -28,7 +28,6 @@ column-span atributa. Zbog toga ce da se poremeti raspored ako u sve tri
 skale postoji po jedan prosiren element u istoj vertikalnoj osi
 
 ### KOZMETICKI NEDOSTACI: 
-- Forme nemaju labele kod inputa
 - Forma za unos poena nije formatirana
 - Nedostaje ime aplikacije u headeru, login i register stranicama
 - Stil je globalno nedovrsen

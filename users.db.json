@@ -3,7 +3,20 @@
     {
       "id": "damjan",
       "password": "trt",
-      "subjects": []
+      "subjects": [
+        {
+          "color": "#000000",
+          "scale": {
+            "rows": 3,
+            "cols": 10,
+            "format": [
+              "XXXXXXXXXX",
+              "XXXXXXXXXX",
+              "XXXXXXXXXX"
+            ]
+          }
+        }
+      ]
     }
   ]
 }

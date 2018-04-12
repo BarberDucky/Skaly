@@ -1,5 +1,5 @@
 export default class Widgets {
-    static input(parent, type) { //colorPicker, subjectInput
+    static input(parent, type) {
         const input = document.createElement('input')
         input.className = 'input'
         input.setAttribute('type', type)
@@ -18,5 +18,18 @@ export default class Widgets {
         div.className = className
         parent.appendChild(div)
         return div
+    }
+    static label(parent, text) {
+        const label = document.createElement('label')
+        label.className = 'label'
+        label.innerHTML = text
+        parent.appendChild(label)
+        return label
+    }
+    static inputDiv(parent, type, text) {
+        const inputDiv = this.div(parent, 'inputDiv')
+        inputDiv.label = this.label(inputDiv, text)
+        inputDiv.input = this.input(inputDiv, type)
+        return inputDiv
     }
 }

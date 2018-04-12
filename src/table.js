@@ -274,29 +274,29 @@ export default class Table {
     }
     createInput(parent) {
         const pointDiv = Widgets.div(parent, 'pointDiv')
-        const pointInput = Widgets.input(pointDiv, 'text')
-        const maxInput = Widgets.input(pointDiv, 'text')
+        const pointInput = Widgets.inputDiv(pointDiv, 'text', 'Earned points')
+        const maxInput = Widgets.inputDiv(pointDiv, 'text', 'Maximum possible points')
         const submitButton = Widgets.button(pointDiv, 'Submit')
         const cancelButton = Widgets.button(pointDiv, 'Cancel')
         pointDiv.hidden = true
         submitButton.onclick = () => {
             if (this.selectedBox.data) {
                 let colSpan = parseInt(this.selectedBox.colSpan)
-                let point = parseInt(pointInput.value)
-                let max = parseInt(maxInput.value)
+                let point = parseInt(pointInput.input.value)
+                let max = parseInt(maxInput.input.value)
                 if (!isNaN(point) && !isNaN(max) && max >= point) {
                     this.selectedBox.points = (((point * 100 / max) / 100) * 10 * colSpan).toFixed(2)
                     this.selectedBox.lowerText.innerHTML = this.selectedBox.points
                     pointDiv.hidden = true
-                    pointInput.value = ''
-                    maxInput.value = ''
+                    pointInput.input.value = ''
+                    maxInput.input.value = ''
                 } else {
                     alert('invalid input')
                 }
             } else {
                 pointDiv.hidden = true
-                pointInput.value = ''
-                maxInput.value = ''
+                pointInput.input.value = ''
+                maxInput.input.value = ''
             }
         }
         cancelButton.onclick = () => {

@@ -22,54 +22,55 @@ export class View {
     renderRegister(parent) {
         const regDiv = Widgets.div(parent, 'regPageDiv')
 
-        const userInput = Widgets.input(regDiv, 'text')
+        const userInput = Widgets.inputDiv(regDiv, 'text', 'Username')
 
-        const passInput = Widgets.input(regDiv, 'password')
+        const passInput = Widgets.inputDiv(regDiv, 'password', 'Password')
 
         const submitButton = Widgets.button(regDiv, 'Register')
         Rxjs.Observable.fromEvent(submitButton, 'click')
             .subscribe(() => {
                 const credentials = {
-                    id: userInput.value,
-                    password: passInput.value
+                    id: userInput.input.value,
+                    password: passInput.input.value
                 }
                 this.service.addUser(credentials)
                     .then(() => this.displayPage('loginPageDiv'))
                     .then(() => {
-                        userInput.value = ''
-                        passInput.value = ''
+                        userInput.input.value = ''
+                        passInput.input.value = ''
                     })
                     .catch(rej => {})
             })
 
         const backButton = Widgets.button(regDiv, 'Back')
         backButton.onclick = () => {
-            userInput.value = ''
-            passInput.value = ''
+            userInput.input.value = ''
+            passInput.input.value = ''
             this.displayPage('loginPageDiv')
         }
         return regDiv
     }
     renderLogin(parent) {
         const loginDiv = Widgets.div(parent, 'loginPageDiv')
-        const userInput = Widgets.input(loginDiv, 'text')
 
-        const passInput = Widgets.input(loginDiv, 'password')
+        const userInput = Widgets.inputDiv(loginDiv, 'text', 'Username')
+
+        const passInput = Widgets.inputDiv(loginDiv, 'password', 'Password')
 
         const submitButton = Widgets.button(loginDiv, 'Login')
         Rxjs.Observable.fromEvent(submitButton, 'click')
             .subscribe(() => {
                 const credentials = {
-                    id: userInput.value,
-                    password: passInput.value
+                    id: userInput.input.value,
+                    password: passInput.input.value
                 }
                 this.service.checkUser(credentials)
                     .then(res => this.service.setData(res))
                     .then(res => this.updateAside(this.sideList, this.service.data.subjects))
                     .then(() => this.displayPage('mainPageDiv'))
                     .then(() => {
-                        userInput.value = ''
-                        passInput.value = ''
+                        userInput.input.value = ''
+                        passInput.input.value = ''
                     })
                     .catch(rej => {})
             })
@@ -209,20 +210,20 @@ export class View {
     }
     subjectInput(parent) {
         const subjectInput = Widgets.div(parent, 'subjectInput')
-        const nameInput = Widgets.input(subjectInput, 'text')
+        const nameInput = Widgets.inputDiv(subjectInput, 'text', 'Subject name')
 
         const colorPicker = Widgets.input(subjectInput, 'color')
 
         const submitButton = Widgets.button(subjectInput, 'Submit subject')
         submitButton.onclick = () => {
-            if (nameInput.value != '' && !this.checkDuplicate(nameInput)) {
+            if (nameInput.input.value != '' && !this.checkDuplicate(nameInput.input.value)) {
                 const newInput = {
-                    text: nameInput.value,
+                    text: nameInput.input.value,
                     color: colorPicker.value,
                     scale: this.table.getEmptyScale()
                 }
                 this.service.data.subjects.push(newInput)
-                nameInput.value = ''
+                nameInput.input.value = ''
                 colorPicker.value = '#000000'
                 subjectInput.hidden = true
                 this.service.updateUser()
