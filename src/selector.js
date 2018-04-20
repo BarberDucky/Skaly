@@ -16,6 +16,9 @@ export default class Selector {
         selector.array = this.createAssignments(selector)
         return selector
     }
+    setActive(bool) {
+        this.selector.array.forEach(element => element.draggable = bool)
+    }
     createAssignments(parent) {
         const assignments = Assignments.getAssignments().map(assignment => {
             const assignDiv = Widgets.div(parent, 'assignDiv')

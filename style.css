@@ -56,20 +56,50 @@ header .button {
     float: right;
 }
 
-aside {
+.aside {
     height: 100%;
     width: 250px;
     display: flex;
     align-items: center;
     flex-direction: column;
-    border-right: 1px solid grey;
     overflow-y: scroll;
+    overflow-x: none;
+}
+
+.contentHolder {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    height: 100%;
+    width: 100%;
+}
+
+.contentHolder>.button {
+    border-radius: 50px;
+    height: 50px;
+    width: 50px;
+    background-color: blue;
+    color: white;
+}
+
+@media (max-width: 1000px) {
+    .aside {
+        height: 250px;
+        width: 100%;
+        flex-direction: row;
+        overflow-x: scroll;
+        overflow-y: none;
+    }
+    .contentHolder {
+        flex-direction: column;
+    }
 }
 
 .subjectDiv {
     position: relative;
     cursor: pointer;
     min-height: 200px;
+    flex: 0 0 200px;
     width: 200px;
     height: 200px;
     border-radius: 10px;
@@ -102,6 +132,7 @@ aside {
     border-radius: 50px;
     margin: 10px;
     display: flex;
+    flex: 0 0 50px;
     order: 99;
     align-items: center;
     justify-content: center;
@@ -121,6 +152,7 @@ aside {
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
+    flex: 0 0 200px;
     width: 200px;
     height: 200px;
     border-radius: 10px;
@@ -130,22 +162,6 @@ aside {
 
 [hidden] {
     display: none !important;
-}
-
-.contentHolder {
-    display: flex;
-    overflow: hidden;
-    flex-direction: row;
-    align-items: stretch;
-    height: 100%;
-}
-
-.contentHolder>.button {
-    border-radius: 50px;
-    height: 50px;
-    width: 50px;
-    background-color: blue;
-    color: white;
 }
 
 .tableMain {

@@ -26,18 +26,22 @@ export class View {
 
         const passInput = Widgets.inputDiv(regDiv, 'password', 'Password')
 
+        const superCheck = Widgets.inputDiv(regDiv, 'checkbox', "Super user")
+
         const submitButton = Widgets.button(regDiv, 'Register')
         Rxjs.Observable.fromEvent(submitButton, 'click')
             .subscribe(() => {
                 const credentials = {
                     id: userInput.input.value,
-                    password: passInput.input.value
+                    password: passInput.input.value,
+                    superUser: superCheck.input.checked
                 }
                 this.service.addUser(credentials)
                     .then(() => this.displayPage('loginPageDiv'))
                     .then(() => {
                         userInput.input.value = ''
                         passInput.input.value = ''
+                        superCheck.input.checked = false
                     })
                     .catch(rej => {})
             })
@@ -126,7 +130,8 @@ export class View {
         return header
     }
     aside(parent) {
-        const aside = document.createElement('aside')
+        const aside = document.createElement('div')
+        aside.className = "aside"
         const subjectInput = this.subjectInput(aside)
         subjectInput.hidden = true
         const subjectAddButton = this.subjectAddButton(aside)
@@ -165,7 +170,8 @@ export class View {
             this.selectSubject(subjectDiv)
             let subjectFromService = this.service.data.subjects
                 .filter(subject => subject.text == this.selectedSubject.id)
-            this.table.updateData(subjectFromService[0].scale)
+            this.table.updateData(subjectFromService[0].scale, this.service.data.superUser)
+            console.log(this.service.data.superUser)
         }
         return subjectDiv
 

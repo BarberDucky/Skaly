@@ -3,6 +3,7 @@
     {
       "id": "damjan",
       "password": "asd",
+      "superUser": false,
       "subjects": [
         {
           "text": "asd",
@@ -11,8 +12,66 @@
             "rows": 3,
             "cols": 10,
             "format": [
-              "XKIIXXXXXX",
-              "XXK+XXXXXX",
+              "XXI+XXXXXX",
+              "XXXXXXXXXX",
+              "XXXXXXXXXX"
+            ],
+            "points": [
+              [
+                "X",
+                "X",
+                "20.00",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X"
+              ],
+              [
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X"
+              ],
+              [
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X"
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "dare",
+      "password": "asd",
+      "superUser": true,
+      "subjects": [
+        {
+          "text": "asd",
+          "color": "#000000",
+          "scale": {
+            "rows": 3,
+            "cols": 10,
+            "format": [
+              "XXX+IXXXXX",
+              "XXXXXXXXXX",
               "XXXXXXXXXX"
             ],
             "points": [
@@ -56,53 +115,28 @@
           }
         },
         {
-          "text": "asdd",
+          "text": "asdfs",
           "color": "#000000",
           "scale": {
             "rows": 3,
             "cols": 10,
             "format": [
               "XXXXXXXXXX",
-              "XXIXXXXXXX",
+              "XXXXXXXXXX",
               "XXXXXXXXXX"
-            ],
-            "points": [
-              [
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X"
-              ],
-              [
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X"
-              ],
-              [
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X"
-              ]
+            ]
+          }
+        },
+        {
+          "text": "asda",
+          "color": "#000000",
+          "scale": {
+            "rows": 3,
+            "cols": 10,
+            "format": [
+              "XXXXXXXXXX",
+              "XXXXXXXXXX",
+              "XXXXXXXXXX"
             ]
           }
         }

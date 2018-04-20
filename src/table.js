@@ -7,6 +7,7 @@ export default class Table {
 
         this.table = []
         this.selectedBox = {}
+        this.superUser = false
 
         this.selector = new Selector(this.main)
         this.tableDiv = this.createTable(this.main, 3, 10)
@@ -31,7 +32,9 @@ export default class Table {
             format: ['XXXXXXXXXX', 'XXXXXXXXXX', 'XXXXXXXXXX']
         }
     }
-    updateData(data) {
+    updateData(data, superUser) {
+        this.superUser = superUser
+        this.selector.setActive(superUser)
         for (let i = 0; i < data.rows; i++) {
             let last = {}
             for (let j = 0; j < data.cols; j++) {
@@ -51,14 +54,17 @@ export default class Table {
                             this.table[i][j].points = 0
                             this.table[i][j].lowerText.innerHTML = ''
                         }
-                        this.table[i][j].ondragstart = (ev) => {
-                            ev.dataTransfer.setData('application/json', JSON.stringify(this.table[i][j].data))
-                        }
-                        this.table[i][j].ondragend = (ev) => {
-                            this.updateBox(this.table[i][j], `X${this.table[i][j].code.slice(1)}`,true)
-                            this.deselectPointInput()
+                        if (this.superUser) {
+                            this.table[i][j].ondragstart = (ev) => {
+                                ev.dataTransfer.setData('application/json', JSON.stringify(this.table[i][j].data))
+                            }
+                            this.table[i][j].ondragend = (ev) => {
+                                this.updateBox(this.table[i][j], `X${this.table[i][j].code.slice(1)}`, true)
+                                this.deselectPointInput()
+                            }
                         }
                         this.updateBox(this.table[i][j], assignment.text[0], false)
+
                     } else {
                         this.updateBox(this.table[i][j], 'X', true)
                     }
@@ -99,12 +105,14 @@ export default class Table {
         newCell.controls = this.addControls(newCell, i, j)
         this.updateBox(newCell, 'X', true)
         newCell.onclick = () => {
-            const prevState = newCell.controls.hidden
-            this.deselectControls()
-            newCell.controls.hidden = !prevState
+            if (this.superUser) {
+                const prevState = newCell.controls.hidden
+                this.deselectControls()
+                newCell.controls.hidden = !prevState
+            }
         }
         newCell.ondblclick = () => {
-            if (newCell.data) {
+            if (!this.superUser && newCell.data) {
                 this.selectedBox = newCell
                 this.PointInput.hidden = false
             }
@@ -113,16 +121,18 @@ export default class Table {
             ev.preventDefault()
         }
         newCell.ondrop = (ev) => {
-            ev.preventDefault()
-            const cellData = JSON.parse(ev.dataTransfer.getData('application/json'))
-            newCell.data = cellData
-            this.updateBox(newCell, `${cellData.text[0]}${newCell.code.slice(1)}`, false)
-            newCell.ondragstart = (ev) => {
-                ev.dataTransfer.setData('application/json', JSON.stringify(newCell.data))
-            }
-            newCell.ondragend = (ev) => {
-                this.updateBox(newCell, `X${newCell.code.slice(1)}`, true)
-                this.deselectPointInput()
+            if (this.superUser) {
+                ev.preventDefault()
+                const cellData = JSON.parse(ev.dataTransfer.getData('application/json'))
+                newCell.data = cellData
+                this.updateBox(newCell, `${cellData.text[0]}${newCell.code.slice(1)}`, false)
+                newCell.ondragstart = (ev) => {
+                    ev.dataTransfer.setData('application/json', JSON.stringify(newCell.data))
+                }
+                newCell.ondragend = (ev) => {
+                    this.updateBox(newCell, `X${newCell.code.slice(1)}`, true)
+                    this.deselectPointInput()
+                }
             }
         }
         return newCell
@@ -240,7 +250,7 @@ export default class Table {
             element.style.color = element.data.color
             element.style.borderColor = element.data.color
             element.upperText.innerHTML = element.data.text[0]
-            element.draggable = true
+            element.draggable = true && this.superUser
         } else {
             element.code = code
             element.data = null
@@ -249,7 +259,7 @@ export default class Table {
             element.upperText.innerHTML = ''
             element.lowerText.innerHTML = ''
             element.points = 0
-            element.draggable = false
+            element.draggable = false 
         }
     }
     createPointInput(parent) {
