@@ -143,7 +143,6 @@ export class View {
     }
     subjectDiv(parent, data) {
         const subjectDiv = Widgets.div(parent, 'subjectDiv')
-        subjectDiv.style.backgroundColor = data.color
         subjectDiv.id = data.text
         const text = document.createElement('span')
         text.className = 'text'
@@ -218,19 +217,15 @@ export class View {
         const subjectInput = Widgets.div(parent, 'subjectInput')
         const nameInput = Widgets.inputDiv(subjectInput, 'text', 'Subject name')
 
-        const colorPicker = Widgets.input(subjectInput, 'color')
-
         const submitButton = Widgets.button(subjectInput, 'Submit subject')
         submitButton.onclick = () => {
             if (nameInput.input.value != '' && !this.checkDuplicate(nameInput.input.value)) {
                 const newInput = {
                     text: nameInput.input.value,
-                    color: colorPicker.value,
                     scale: this.table.getEmptyScale()
                 }
                 this.service.data.subjects.push(newInput)
                 nameInput.input.value = ''
-                colorPicker.value = '#000000'
                 subjectInput.hidden = true
                 this.service.updateUser()
                     .then(this.updateAsideOne(parent, newInput))

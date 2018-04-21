@@ -7,116 +7,6 @@
       "subjects": [
         {
           "text": "asd",
-          "color": "#000000",
-          "scale": {
-            "rows": 3,
-            "cols": 10,
-            "format": [
-              "XXI+XXXXXX",
-              "XXXXXXXXXX",
-              "XXXXXXXXXX"
-            ],
-            "points": [
-              [
-                "X",
-                "X",
-                "20.00",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X"
-              ],
-              [
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X"
-              ],
-              [
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X"
-              ]
-            ]
-          }
-        }
-      ]
-    },
-    {
-      "id": "dare",
-      "password": "asd",
-      "superUser": true,
-      "subjects": [
-        {
-          "text": "asd",
-          "color": "#000000",
-          "scale": {
-            "rows": 3,
-            "cols": 10,
-            "format": [
-              "XXX+IXXXXX",
-              "XXXXXXXXXX",
-              "XXXXXXXXXX"
-            ],
-            "points": [
-              [
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X"
-              ],
-              [
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X"
-              ],
-              [
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X"
-              ]
-            ]
-          }
-        },
-        {
-          "text": "asdfs",
-          "color": "#000000",
           "scale": {
             "rows": 3,
             "cols": 10,
@@ -128,8 +18,7 @@
           }
         },
         {
-          "text": "asda",
-          "color": "#000000",
+          "text": "asdd",
           "scale": {
             "rows": 3,
             "cols": 10,

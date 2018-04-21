@@ -96,6 +96,7 @@ header .button {
 }
 
 .subjectDiv {
+    background-color: #f7b10f;
     position: relative;
     cursor: pointer;
     min-height: 200px;
@@ -120,9 +121,9 @@ header .button {
     color: white;
     text-align: center;
     border: 1px solid white;
-    border-radius: 20px;
+    border-radius: 10px;
     font-family: "Century Gothic", CenturyGothic, Geneva, AppleGothic, sans-serif;
-    background-color: red;
+    background-color: blue;
 }
 
 .subjectAddButton {
