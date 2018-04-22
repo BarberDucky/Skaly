@@ -4,13 +4,49 @@
       "id": "asdd",
       "user": "dare",
       "format": [
-        "XXXIXXXXXX",
+        "XXXI+XXXXX",
         "XXXXXXXXXX",
         "XXXXXXXXXX"
       ]
     },
     {
       "id": "da",
+      "user": "dare",
+      "format": [
+        "XXXLXXXXXX",
+        "XXXXXXXXXX",
+        "XXXXXXXXXX"
+      ]
+    },
+    {
+      "id": "d",
+      "user": "asd",
+      "format": [
+        "XXXLIXXXXX",
+        "XXXXXXXXXX",
+        "XXXXXXXXXX"
+      ]
+    },
+    {
+      "id": "asd",
+      "user": "asd",
+      "format": [
+        "XXXXXXXXXX",
+        "XXXXXXXXXX",
+        "XXXXXXXXXX"
+      ]
+    },
+    {
+      "id": "asddd",
+      "user": "dare",
+      "format": [
+        "XXXXPLXXXX",
+        "XXXXXXXXXX",
+        "XXXXXXXXXX"
+      ]
+    },
+    {
+      "id": "dd",
       "user": "dare",
       "format": [
         "XXXXXXXXXX",
@@ -62,7 +98,7 @@
             "rows": 3,
             "cols": 10,
             "format": [
-              "XXXIXXXXXX",
+              "XXXI+XXXXX",
               "XXXXXXXXXX",
               "XXXXXXXXXX"
             ],
@@ -108,6 +144,175 @@
         },
         {
           "text": "da",
+          "scale": {
+            "rows": 3,
+            "cols": 10,
+            "format": [
+              "XXXLXXXXXX",
+              "XXXXXXXXXX",
+              "XXXXXXXXXX"
+            ],
+            "points": [
+              [
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X"
+              ],
+              [
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X"
+              ],
+              [
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X"
+              ]
+            ]
+          }
+        },
+        {
+          "text": "asddd",
+          "scale": {
+            "rows": 3,
+            "cols": 10,
+            "format": [
+              "XXXXPLXXXX",
+              "XXXXXXXXXX",
+              "XXXXXXXXXX"
+            ],
+            "points": [
+              [
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X"
+              ],
+              [
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X"
+              ],
+              [
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X"
+              ]
+            ]
+          }
+        },
+        {
+          "text": "dd",
+          "scale": {
+            "rows": 3,
+            "cols": 10,
+            "format": [
+              "XXXXXXXXXX",
+              "XXXXXXXXXX",
+              "XXXXXXXXXX"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "asd",
+      "password": "asd",
+      "superUser": true,
+      "subjects": [
+        {
+          "text": "d",
+          "scale": {
+            "rows": 3,
+            "cols": 10,
+            "format": [
+              "XXXLIXXXXX",
+              "XXXXXXXXXX",
+              "XXXXXXXXXX"
+            ],
+            "points": [
+              [
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X"
+              ],
+              [
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X"
+              ],
+              [
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X"
+              ]
+            ]
+          }
+        },
+        {
+          "text": "asd",
           "scale": {
             "rows": 3,
             "cols": 10,

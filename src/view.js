@@ -177,9 +177,16 @@ export class View {
             this.selectedSubject = subjectDiv
             this.selectSubject(subjectDiv)
             let subjectFromService = this.service.data.subjects
-                .filter(subject => subject.text == this.selectedSubject.id)
-            this.table.updateData(subjectFromService[0].scale, this.service.data.superUser)
-            console.log(this.service.data.superUser)
+                .find(subject => subject.text == this.selectedSubject.id)
+            FormatService.getFormat(subjectFromService)
+                .then(res => {
+                    this.table.updateData({
+                        format: res.format,
+                        points: subjectFromService.scale.points,
+                        rows: subjectFromService.scale.rows,
+                        cols: subjectFromService.scale.cols
+                    }, this.service.data.superUser)
+                })
         }
         return subjectDiv
 
@@ -233,20 +240,26 @@ export class View {
                     text: nameInput.input.value,
                     scale: this.table.getEmptyScale()
                 }
-                this.service.data.subjects.push(newInput)
-                nameInput.input.value = ''
-                subjectInput.hidden = true
-                this.service.updateUser()
-                    .then(this.updateAsideOne(parent, newInput))
                 if (this.service.data.superUser) {
                     FormatService.postFormat(newInput, this.service.data.id)
+                        .then(() => {
+                            this.service.data.subjects.push(newInput)
+                            nameInput.input.value = ''
+                            subjectInput.hidden = true
+                            this.service.updateUser()
+                                .then(this.updateAsideOne(parent, newInput))
+                        })
+                        .catch(rej => {})
                 }
             } else {
                 alert('Pogresan unos')
             }
         }
         const cancelButton = Widgets.button(subjectInput, 'Cancel')
-        cancelButton.onclick = () => subjectInput.hidden = true
+        cancelButton.onclick = () => {
+            nameInput.input.value = ''
+            subjectInput.hidden = true
+        }
         return subjectInput
     }
     checkDuplicate(text) {

@@ -33,6 +33,7 @@ export default class Table {
         }
     }
     updateData(data, superUser) {
+        console.log(data)
         this.superUser = superUser
         this.selector.setActive(superUser)
         for (let i = 0; i < data.rows; i++) {
