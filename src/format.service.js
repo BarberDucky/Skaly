@@ -1,11 +1,11 @@
 export default class FormatService {
     static getFormat(subject) {
-        return fetch(`http://localhost:3000/formats/${subject.text}`)
+        return fetch(`http://localhost:3000/formats?id=${subject.text}`)
             .then(res => res.json())
             .then(res => {
                 if (res.length != 0) {
-                    console.log(res)
-                    return Promise.resolve(res)
+                    console.log(res[0])
+                    return Promise.resolve(res[0])
                 }
             })
     }

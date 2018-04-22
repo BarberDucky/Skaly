@@ -48,7 +48,7 @@ export default class Table {
                     let assignment = this.selector.findAssignment(data.format[i][j])
                     if (assignment) {
                         this.table[i][j].data = assignment
-                        if (data.points[i][j] != 'X') {
+                        if (data.points && data.points[i][j] != 'X') {
                             this.table[i][j].points = data.points[i][j]
                             this.table[i][j].lowerText.innerHTML = this.table[i][j].points
                         } else {

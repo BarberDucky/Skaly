@@ -250,6 +250,18 @@ export class View {
                                 .then(this.updateAsideOne(parent, newInput))
                         })
                         .catch(rej => {})
+                } else {
+                    FormatService.getFormat(newInput)
+                        .then(res => {
+                            newInput.text = res.id
+                            newInput.scale.format = res.format
+                            this.service.data.subjects.push(newInput)
+                            nameInput.input.value = ''
+                            subjectInput.hidden = true
+                            this.service.updateUser()
+                                .then(this.updateAsideOne(parent, newInput))
+                        })
+                        .catch(rej => alert("Subject doesn't exist"))
                 }
             } else {
                 alert('Pogresan unos')

@@ -1,63 +1,14 @@
 {
-  "formats": [
+  "formats": [],
+  "users": [
     {
-      "id": "asdd",
-      "user": "dare",
-      "format": [
-        "XXXI+XXXXX",
-        "XXXXXXXXXX",
-        "XXXXXXXXXX"
-      ]
-    },
-    {
-      "id": "da",
-      "user": "dare",
-      "format": [
-        "XXXLXXXXXX",
-        "XXXXXXXXXX",
-        "XXXXXXXXXX"
-      ]
-    },
-    {
-      "id": "d",
-      "user": "asd",
-      "format": [
-        "XXXLIXXXXX",
-        "XXXXXXXXXX",
-        "XXXXXXXXXX"
-      ]
+      "id": "dare",
+      "password": "asd",
+      "superUser": true,
+      "subjects": []
     },
     {
       "id": "asd",
-      "user": "asd",
-      "format": [
-        "XXXXXXXXXX",
-        "XXXXXXXXXX",
-        "XXXXXXXXXX"
-      ]
-    },
-    {
-      "id": "asddd",
-      "user": "dare",
-      "format": [
-        "XXXXPLXXXX",
-        "XXXXXXXXXX",
-        "XXXXXXXXXX"
-      ]
-    },
-    {
-      "id": "dd",
-      "user": "dare",
-      "format": [
-        "XXXXXXXXXX",
-        "XXXXXXXXXX",
-        "XXXXXXXXXX"
-      ]
-    }
-  ],
-  "users": [
-    {
-      "id": "damjan",
       "password": "asd",
       "superUser": false,
       "subjects": [
@@ -67,39 +18,8 @@
             "rows": 3,
             "cols": 10,
             "format": [
-              "XXXXXXXXXX",
-              "XXXXXXXXXX",
-              "XXXXXXXXXX"
-            ]
-          }
-        },
-        {
-          "text": "asdd",
-          "scale": {
-            "rows": 3,
-            "cols": 10,
-            "format": [
-              "XXXXXXXXXX",
-              "XXXXXXXXXX",
-              "XXXXXXXXXX"
-            ]
-          }
-        }
-      ]
-    },
-    {
-      "id": "dare",
-      "password": "asd",
-      "superUser": true,
-      "subjects": [
-        {
-          "text": "asdd",
-          "scale": {
-            "rows": 3,
-            "cols": 10,
-            "format": [
-              "XXXI+XXXXX",
-              "XXXXXXXXXX",
+              "XXXILXXXXX",
+              "XXXPIXXXXX",
               "XXXXXXXXXX"
             ],
             "points": [
@@ -107,7 +27,7 @@
                 "X",
                 "X",
                 "X",
-                "X",
+                "10.00",
                 "X",
                 "X",
                 "X",
@@ -139,187 +59,6 @@
                 "X",
                 "X"
               ]
-            ]
-          }
-        },
-        {
-          "text": "da",
-          "scale": {
-            "rows": 3,
-            "cols": 10,
-            "format": [
-              "XXXLXXXXXX",
-              "XXXXXXXXXX",
-              "XXXXXXXXXX"
-            ],
-            "points": [
-              [
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X"
-              ],
-              [
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X"
-              ],
-              [
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X"
-              ]
-            ]
-          }
-        },
-        {
-          "text": "asddd",
-          "scale": {
-            "rows": 3,
-            "cols": 10,
-            "format": [
-              "XXXXPLXXXX",
-              "XXXXXXXXXX",
-              "XXXXXXXXXX"
-            ],
-            "points": [
-              [
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X"
-              ],
-              [
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X"
-              ],
-              [
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X"
-              ]
-            ]
-          }
-        },
-        {
-          "text": "dd",
-          "scale": {
-            "rows": 3,
-            "cols": 10,
-            "format": [
-              "XXXXXXXXXX",
-              "XXXXXXXXXX",
-              "XXXXXXXXXX"
-            ]
-          }
-        }
-      ]
-    },
-    {
-      "id": "asd",
-      "password": "asd",
-      "superUser": true,
-      "subjects": [
-        {
-          "text": "d",
-          "scale": {
-            "rows": 3,
-            "cols": 10,
-            "format": [
-              "XXXLIXXXXX",
-              "XXXXXXXXXX",
-              "XXXXXXXXXX"
-            ],
-            "points": [
-              [
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X"
-              ],
-              [
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X"
-              ],
-              [
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X"
-              ]
-            ]
-          }
-        },
-        {
-          "text": "asd",
-          "scale": {
-            "rows": 3,
-            "cols": 10,
-            "format": [
-              "XXXXXXXXXX",
-              "XXXXXXXXXX",
-              "XXXXXXXXXX"
             ]
           }
         }
