@@ -1,6 +1,7 @@
 import * as Rxjs from 'rxjs'
 import Table from './table'
 import Widgets from './widgets'
+import FormatService from './format.service'
 import {
     UsersService
 } from './users.service'
@@ -109,12 +110,15 @@ export class View {
         this.table.main.hidden = true
         const button = Widgets.button(contentHolder, 'Save table')
         button.onclick = () => {
-            this.service.data.subjects.map(subject => {
-                if (subject.text == this.selectedSubject.id) {
-                    subject.scale = this.table.getData()
-                }
-            })
+            const selected = this.service.data.subjects
+                .find(subject => subject.text == this.selectedSubject.id)
+            if (selected) {
+                selected.scale = this.table.getData()
+            }
             this.service.updateUser()
+            if (this.service.data.superUser) {
+                FormatService.putFormat(selected, this.service.data.id)
+            }
         }
         return contentHolder
     }
@@ -152,6 +156,8 @@ export class View {
 
         const deleteBox = this.deleteBox(subjectDiv)
         deleteBox.onclick = (ev) => {
+            const oldSubject = this.service.data.subjects
+                .find(subject => subject.text == subjectDiv.id)
             const newSubjects = this.service.data.subjects
                 .filter(subject => {
                     return subject.text != subjectDiv.id
@@ -159,6 +165,9 @@ export class View {
             this.service.data.subjects = newSubjects
             this.deleteAsideOne(parent, subjectDiv.id)
             this.service.updateUser()
+            if (this.service.data.superUser) {
+                FormatService.deleteFormat(oldSubject)
+            }
             this.table.main.hidden = true
             ev.cancelBubble = true
         }
@@ -229,6 +238,9 @@ export class View {
                 subjectInput.hidden = true
                 this.service.updateUser()
                     .then(this.updateAsideOne(parent, newInput))
+                if (this.service.data.superUser) {
+                    FormatService.postFormat(newInput, this.service.data.id)
+                }
             } else {
                 alert('Pogresan unos')
             }

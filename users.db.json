@@ -1,4 +1,24 @@
 {
+  "formats": [
+    {
+      "id": "asdd",
+      "user": "dare",
+      "format": [
+        "XXXIXXXXXX",
+        "XXXXXXXXXX",
+        "XXXXXXXXXX"
+      ]
+    },
+    {
+      "id": "da",
+      "user": "dare",
+      "format": [
+        "XXXXXXXXXX",
+        "XXXXXXXXXX",
+        "XXXXXXXXXX"
+      ]
+    }
+  ],
   "users": [
     {
       "id": "damjan",
@@ -19,6 +39,75 @@
         },
         {
           "text": "asdd",
+          "scale": {
+            "rows": 3,
+            "cols": 10,
+            "format": [
+              "XXXXXXXXXX",
+              "XXXXXXXXXX",
+              "XXXXXXXXXX"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "dare",
+      "password": "asd",
+      "superUser": true,
+      "subjects": [
+        {
+          "text": "asdd",
+          "scale": {
+            "rows": 3,
+            "cols": 10,
+            "format": [
+              "XXXIXXXXXX",
+              "XXXXXXXXXX",
+              "XXXXXXXXXX"
+            ],
+            "points": [
+              [
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X"
+              ],
+              [
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X"
+              ],
+              [
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X"
+              ]
+            ]
+          }
+        },
+        {
+          "text": "da",
           "scale": {
             "rows": 3,
             "cols": 10,
