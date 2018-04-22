@@ -41,47 +41,9 @@
             "rows": 3,
             "cols": 10,
             "format": [
-              "XXXILXXXXX",
-              "XXXPIXXXXX",
+              "XXXXXXXXXX",
+              "XXXXXXXXXX",
               "XXXXXXXXXX"
-            ],
-            "points": [
-              [
-                "X",
-                "X",
-                "X",
-                "10.00",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X"
-              ],
-              [
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X"
-              ],
-              [
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X"
-              ]
             ]
           }
         }

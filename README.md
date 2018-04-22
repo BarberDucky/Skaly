@@ -23,12 +23,9 @@ Klikom na dugme Calculate se prikazuje broj najvise osvojenih poena (po skali).
 Tabela i poeni se cuvaju u bazi pritiskom na dugme 'Save', inace se izmene brisu.
 
 ### FUNKCIONALNI NEDOSTACI:
-- Tabela je <table> html element i velicina polja se odredjuje preko 
-column-span atributa. Zbog toga ce da se poremeti raspored ako u sve tri
-skale postoji po jedan prosiren element u istoj vertikalnoj osi
 - Problemi sa drag and drop
 
 ### KOZMETICKI NEDOSTACI: 
 - Forma za unos poena nije formatirana
-- Nedostaje ime aplikacije u headeru, login i register stranicama
+- Nedostaje ime aplikacije u headeru
 - Stil je globalno nedovrsen

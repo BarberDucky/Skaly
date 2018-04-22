@@ -23,13 +23,17 @@ export class View {
     renderRegister(parent) {
         const regDiv = Widgets.div(parent, 'regPageDiv')
 
+        const appTitle = Widgets.textElement(regDiv, "h1", "Skaly.")
+
+        const pageTitle = Widgets.textElement(regDiv, "h2", "Register")
+
         const userInput = Widgets.inputDiv(regDiv, 'text', 'Username')
 
         const passInput = Widgets.inputDiv(regDiv, 'password', 'Password')
 
-        const superCheck = Widgets.inputDiv(regDiv, 'checkbox', "Super user")
+        const superCheck = Widgets.inputDiv(regDiv, 'checkbox', "Super user", true)
 
-        const submitButton = Widgets.button(regDiv, 'Register')
+        const submitButton = Widgets.button(regDiv, 'REGISTER')
         Rxjs.Observable.fromEvent(submitButton, 'click')
             .subscribe(() => {
                 const credentials = {
@@ -47,7 +51,7 @@ export class View {
                     .catch(rej => {})
             })
 
-        const backButton = Widgets.button(regDiv, 'Back')
+        const backButton = Widgets.button(regDiv, 'BACK')
         backButton.onclick = () => {
             userInput.input.value = ''
             passInput.input.value = ''
@@ -58,11 +62,15 @@ export class View {
     renderLogin(parent) {
         const loginDiv = Widgets.div(parent, 'loginPageDiv')
 
+        const appTitle = Widgets.textElement(loginDiv, "h1", "Skaly.")
+
+        const pageTitle = Widgets.textElement(loginDiv, "h2", "Login")
+
         const userInput = Widgets.inputDiv(loginDiv, 'text', 'Username')
 
         const passInput = Widgets.inputDiv(loginDiv, 'password', 'Password')
 
-        const submitButton = Widgets.button(loginDiv, 'Login')
+        const submitButton = Widgets.button(loginDiv, 'LOGIN')
         Rxjs.Observable.fromEvent(submitButton, 'click')
             .subscribe(() => {
                 const credentials = {
@@ -80,7 +88,7 @@ export class View {
                     .catch(rej => {})
             })
 
-        const registerButton = Widgets.button(loginDiv, 'Register')
+        const registerButton = Widgets.button(loginDiv, 'REGISTER')
         registerButton.onclick = () => this.displayPage('regPageDiv')
         return loginDiv
     }

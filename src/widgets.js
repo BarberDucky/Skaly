@@ -26,10 +26,20 @@ export default class Widgets {
         parent.appendChild(label)
         return label
     }
-    static inputDiv(parent, type, text) {
+    static inputDiv(parent, type, text, inline) {
         const inputDiv = this.div(parent, 'inputDiv')
         inputDiv.label = this.label(inputDiv, text)
         inputDiv.input = this.input(inputDiv, type)
+        if (inline) {
+            inputDiv.style.display = "inline";
+        }
         return inputDiv
+    }
+
+    static textElement(parent, type, text) {
+        const element = document.createElement(type)
+        element.innerHTML = text
+        parent.appendChild(element)
+        return element
     }
 }

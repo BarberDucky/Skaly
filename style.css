@@ -4,16 +4,28 @@ body,
     height: 100%;
     width: 100%;
     margin: 0;
+    font-family: 'Open Sans', sans-serif;
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(to bottom right, #004ead, #157EFB);
+}
+
+h1 {
+    color: #004ead;
+    font-weight: lighter;
+    font-size: 2.5em;
 }
 
 .loginPageDiv {
     display: flex;
     flex-direction: column;
-    width: 30%;
-    height: 50%;
+    width: 355px;
+    height: 60%;
+    min-height: 440px;
     align-items: center;
     justify-content: space-around;
-    border: 4px dashed blue;
+    background-color: white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     border-radius: 20px;
     padding: 50px;
     margin: auto;
@@ -22,38 +34,90 @@ body,
 .regPageDiv {
     display: flex;
     flex-direction: column;
-    width: 30%;
-    height: 50%;
+    width: 355px;
+    height: 60%;
+    min-height: 440px;
     align-items: center;
     justify-content: space-around;
-    border: 4px dashed blue;
+    background-color: white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     border-radius: 20px;
     padding: 50px;
     margin: auto;
 }
 
-.loginPageDiv>.input {
+.loginPageDiv > .input {
     text-align: center;
     padding: 15px;
     font-size: 20px;
+    padding: 5px;
+    background-color: red;
+    font-family: 'Open Sans', sans-serif;
 }
 
 .loginPageDiv>.button {
     color: white;
-    font-size: 20px;
-    background-color: blue;
-    height: 50px;
-    border-radius: 10px;
+    font-size: 15px;
+    background-color: #157EFB;
+    height: 40px;
+    border: none;
+    border-radius: 5px;
     width: 200px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.regPageDiv > .input {
+    text-align: center;
+    padding: 15px;
+    font-size: 20px;
+    padding: 5px;
+    background-color: red;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.regPageDiv>.button {
+    color: white;
+    font-size: 15px;
+    background-color: #157EFB;
+    height: 40px;
+    border: none;
+    border-radius: 5px;
+    width: 200px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.inputDiv {
+    display: flex;
+    flex-direction: column;
+}
+
+.inputDiv .input {
+    border-radius: 5px;
+    padding: 7px;
+    border: 1.5px solid grey;
+    font-size: 15px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+mainPageDiv {
+    flex-grow: 1;
 }
 
 header {
-    height: 50px;
-    background-color: blue;
+    height: 67px;
+    background-color: #004ead;
 }
 
 header .button {
     float: right;
+    color: white;
+    font-size: 15px;
+    background-color: #157EFB;
+    border: none;
+    padding: 10px;
+    margin: 14px;
+    border-radius: 5px;
+    font-family: 'Open Sans', sans-serif;
 }
 
 .aside {
@@ -72,14 +136,20 @@ header .button {
     align-items: stretch;
     height: 100%;
     width: 100%;
+    background-color: white;
 }
 
 .contentHolder>.button {
-    border-radius: 50px;
-    height: 50px;
-    width: 50px;
-    background-color: blue;
     color: white;
+    font-size: 15px;
+    background-color: #004ead;
+    border: none;
+    height: 40px;
+    min-width: 92px;
+    padding: 10px;
+    margin: 14px;
+    border-radius: 5px;
+    font-family: 'Open Sans', sans-serif;
 }
 
 @media (max-width: 1000px) {
@@ -122,8 +192,7 @@ header .button {
     text-align: center;
     border: 1px solid white;
     border-radius: 10px;
-    font-family: "Century Gothic", CenturyGothic, Geneva, AppleGothic, sans-serif;
-    background-color: blue;
+    background-color: #157EFB;
 }
 
 .subjectAddButton {
@@ -138,12 +207,11 @@ header .button {
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    background-color: blue;
+    background-color: #004ead;
 }
 
 .text {
     font-size: 30px;
-    font-family: "Century Gothic", CenturyGothic, Geneva, AppleGothic, sans-serif;
 }
 
 .subjectInput {
