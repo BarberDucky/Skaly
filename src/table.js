@@ -84,7 +84,14 @@ export default class Table {
     }
     createTable(parent, rowNum, colNum) {
         const tableDiv = document.createElement('table')
-        let row = {}
+        let row
+        let header
+        row = document.createElement('tr')
+        tableDiv.appendChild(row)
+        for (let i = 0; i < colNum; i++) {
+            header = document.createElement('th')
+            row.appendChild(header)
+        }
         for (let i = 0; i < rowNum; i++) {
             row = document.createElement('tr')
             this.table[i] = []
@@ -260,7 +267,7 @@ export default class Table {
             element.upperText.innerHTML = ''
             element.lowerText.innerHTML = ''
             element.points = 0
-            element.draggable = false 
+            element.draggable = false
         }
     }
     createPointInput(parent) {

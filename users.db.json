@@ -1,11 +1,34 @@
 {
-  "formats": [],
+  "formats": [
+    {
+      "id": "asd",
+      "user": "dare",
+      "format": [
+        "XXXXXXXXXX",
+        "XXXXXXXXXX",
+        "XXXXXXXXXX"
+      ]
+    }
+  ],
   "users": [
     {
       "id": "dare",
       "password": "asd",
       "superUser": true,
-      "subjects": []
+      "subjects": [
+        {
+          "text": "asd",
+          "scale": {
+            "rows": 3,
+            "cols": 10,
+            "format": [
+              "XXXXXXXXXX",
+              "XXXXXXXXXX",
+              "XXXXXXXXXX"
+            ]
+          }
+        }
+      ]
     },
     {
       "id": "asd",
