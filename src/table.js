@@ -72,6 +72,10 @@ export default class Table {
                 } else {
                     let oldSpan = parseInt(last.colSpan)
                     last.colSpan = `${oldSpan + 1}`
+                    last.points = parseFloat(((last.points / oldSpan) * (oldSpan + 1)).toFixed(2))
+                    if (!superUser) {
+                        last.lowerText.innerHTML = last.points
+                    }
                     last.code += '+'
                     last.history.push('hide')
                     this.table[i][j].colSpan = '1'
@@ -156,7 +160,8 @@ export default class Table {
             points[i] = []
             for (let j = 0; j < this.table[i].length; j++) {
                 if (this.table[i][j].points) {
-                    points[i][j] = this.table[i][j].points
+                    let span = parseInt(this.table[i][j].colSpan)
+                    points[i][j] = this.table[i][j].points / span
                 } else {
                     points[i][j] = 'X'
                 }
@@ -251,7 +256,7 @@ export default class Table {
     modifyPoints(cell, oldSpan, operation) {
         if (cell.points) {
             const newSpan = operation(oldSpan)
-            cell.points = ((newSpan * cell.points) / oldSpan).toFixed(2)
+            cell.points = parseFloat(((newSpan * cell.points) / oldSpan).toFixed(2))
             cell.lowerText.innerHTML = cell.points
         }
     }
@@ -285,8 +290,8 @@ export default class Table {
                 let colSpan = parseInt(this.selectedBox.colSpan)
                 let point = parseInt(pointDiv.pointInput.input.value)
                 let max = parseInt(pointDiv.maxInput.input.value)
-                if (!isNaN(point) && !isNaN(max) && max >= point) {
-                    this.selectedBox.points = (((point * 100 / max) / 100) * 10 * colSpan).toFixed(2)
+                if (!isNaN(point) && !isNaN(max) && point >= 0 && max != 0 && max >= point) {
+                    this.selectedBox.points = parseFloat((((point * 100 / max) / 100) * 10 * colSpan).toFixed(2))
                     this.selectedBox.lowerText.innerHTML = this.selectedBox.points
                     this.deselectCell(this.selectedBox)
                 } else {
@@ -313,7 +318,7 @@ export default class Table {
             for (let i = 0; i < this.table.length; i++) {
                 rowValue = this.table[i]
                     .filter(element => element.points && !element.hidden)
-                    .reduce((acc, element) => acc + parseInt(element.points), 0)
+                    .reduce((acc, element) => acc + parseFloat(element.points), 0)
                 if (rowValue > max) {
                     max = rowValue
                 }
