@@ -24,8 +24,10 @@ Tabela i poeni se cuvaju u bazi pritiskom na dugme 'Save', inace se izmene brisu
 
 ### FUNKCIONALNI NEDOSTACI:
 - Problemi sa drag and drop
+- Brisanje se ne azurira
+- Ne prikazuju se poeni u formi
 
 ### KOZMETICKI NEDOSTACI: 
 - Forma za unos poena nije formatirana
 - Nedostaje ime aplikacije u headeru
-- Stil je globalno nedovrsen
+

@@ -15,7 +15,6 @@ export class View {
         this.mainDiv.registerPage = this.renderRegister(this.mainDiv)
         this.mainDiv.loginPage = this.renderLogin(this.mainDiv)
         this.mainDiv.mainPage = this.renderMain(this.mainDiv)
-
         this.displayPage('loginPageDiv')
 
         document.body.appendChild(this.mainDiv)
@@ -116,8 +115,9 @@ export class View {
         this.sideList = aside
         this.table = new Table(contentHolder)
         this.table.main.hidden = true
-        const button = Widgets.button(contentHolder, 'Save table')
-        button.onclick = () => {
+        this.saveButton = Widgets.button(contentHolder, 'Save table')
+        this.saveButton.hidden = true
+        this.saveButton.onclick = () => {
             const selected = this.service.data.subjects
                 .find(subject => subject.text == this.selectedSubject.id)
             if (selected) {
@@ -128,6 +128,9 @@ export class View {
                 FormatService.putFormat(selected, this.service.data.id)
             }
         }
+        this.tableHolder = Widgets.div(contentHolder, 'tableHolder')
+        this.tableHolder.appendChild(this.table.main)
+        this.tableHolder.appendChild(this.saveButton)
         return contentHolder
     }
     header(parent) {
@@ -136,6 +139,7 @@ export class View {
         logoutButton.onclick = () => {
             this.deleteAside(this.sideList, this.service.data.subjects)
             this.table.main.hidden = true
+            this.saveButton.hidden = true
             this.displayPage('loginPageDiv')
         }
         parent.appendChild(header)
@@ -181,6 +185,7 @@ export class View {
         }
         subjectDiv.onclick = () => {
             this.table.main.hidden = false
+            this.saveButton.hidden = false
             this.table.deselectAll()
             this.selectedSubject = subjectDiv
             this.selectSubject(subjectDiv)

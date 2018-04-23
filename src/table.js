@@ -6,7 +6,7 @@ export default class Table {
         this.main = Widgets.div(parent, 'tableMain')
 
         this.table = []
-        this.selectedBox = {}
+        this.selectedBox = null
         this.superUser = false
 
         this.selector = new Selector(this.main)
@@ -33,7 +33,7 @@ export default class Table {
         }
     }
     updateData(data, superUser) {
-        console.log(data)
+        this.calculateButton.hidden = superUser
         this.superUser = superUser
         this.selector.setActive(superUser)
         for (let i = 0; i < data.rows; i++) {
@@ -117,12 +117,15 @@ export default class Table {
                 const prevState = newCell.controls.hidden
                 this.deselectControls()
                 newCell.controls.hidden = !prevState
-            }
-        }
-        newCell.ondblclick = () => {
-            if (!this.superUser && newCell.data) {
-                this.selectedBox = newCell
-                this.PointInput.hidden = false
+            } else if (newCell.data) {
+                let oldCell = this.selectedBox
+                this.deselectCell(this.selectedBox)
+                if (oldCell != newCell) {
+                    this.selectedBox = newCell
+                    this.PointInput.hidden = false
+                    console.log(newCell)
+                    this.selectCell(newCell)
+                }
             }
         }
         newCell.ondragover = (ev) => {
@@ -285,16 +288,16 @@ export default class Table {
                 if (!isNaN(point) && !isNaN(max) && max >= point) {
                     this.selectedBox.points = (((point * 100 / max) / 100) * 10 * colSpan).toFixed(2)
                     this.selectedBox.lowerText.innerHTML = this.selectedBox.points
-                    this.deselectPointInput()
+                    this.deselectCell(this.selectedBox)
                 } else {
                     alert('invalid input')
                 }
             } else {
-                this.deselectPointInput()
+                this.deselectCell(this.selectedBox)
             }
         }
         pointDiv.cancelButton.onclick = () => {
-            this.deselectPointInput()
+            this.deselectCell(this.selectedBox)
         }
         return pointDiv
     }
@@ -320,6 +323,23 @@ export default class Table {
         }
         return calcButton
     }
+    selectCell(pointDiv) {
+        let color = pointDiv.style.color
+        pointDiv.style.color = "white"
+        pointDiv.style.backgroundColor = color
+        pointDiv.style.borderColor = "white"
+    }
+    deselectCell(pointDiv) {
+        console.log(pointDiv)
+        if (pointDiv) {
+            let color = pointDiv.style.backgroundColor
+            pointDiv.style.color = color
+            pointDiv.style.backgroundColor = "white"
+            pointDiv.style.borderColor = color
+            this.selectedBox = null
+            this.deselectPointInput()
+        }
+    }
     deselectControls() {
         for (let i = 0; i < this.table.length; i++) {
             for (let j = 0; j < this.table[i].length; j++) {
@@ -335,6 +355,8 @@ export default class Table {
     deselectAll() {
         this.deselectControls()
         this.deselectPointInput()
+        this.deselectCell(this.selectedBox)
         this.caluclateText.hidden = true
     }
+
 }

@@ -46,7 +46,7 @@ h1 {
     margin: auto;
 }
 
-.loginPageDiv > .input {
+.loginPageDiv>.input {
     text-align: center;
     padding: 15px;
     font-size: 20px;
@@ -66,7 +66,7 @@ h1 {
     font-family: 'Open Sans', sans-serif;
 }
 
-.regPageDiv > .input {
+.regPageDiv>.input {
     text-align: center;
     padding: 15px;
     font-size: 20px;
@@ -139,19 +139,6 @@ header .button {
     background-color: white;
 }
 
-.contentHolder>.button {
-    color: white;
-    font-size: 15px;
-    background-color: #004ead;
-    border: none;
-    height: 40px;
-    min-width: 92px;
-    padding: 10px;
-    margin: 14px;
-    border-radius: 5px;
-    font-family: 'Open Sans', sans-serif;
-}
-
 @media (max-width: 1000px) {
     .aside {
         height: 250px;
@@ -163,6 +150,24 @@ header .button {
     .contentHolder {
         flex-direction: column;
     }
+}
+
+.tableHolder {
+    display: flex;
+    flex-direction: column;
+}
+
+.tableHolder>.button {
+    color: white;
+    font-size: 15px;
+    background-color: #004ead;
+    border: none;
+    height: 40px;
+    min-width: 92px;
+    padding: 10px;
+    margin: 14px;
+    border-radius: 5px;
+    font-family: 'Open Sans', sans-serif;
 }
 
 .subjectDiv {

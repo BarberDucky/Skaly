@@ -4,6 +4,15 @@
       "id": "asd",
       "user": "dare",
       "format": [
+        "XXIXIXXXXX",
+        "XXXLXXXXXX",
+        "XXXXXXXXXX"
+      ]
+    },
+    {
+      "id": "asdd",
+      "user": "dare",
+      "format": [
         "XXXXXXXXXX",
         "XXXXXXXXXX",
         "XXXXXXXXXX"
@@ -18,6 +27,56 @@
       "subjects": [
         {
           "text": "asd",
+          "scale": {
+            "rows": 3,
+            "cols": 10,
+            "format": [
+              "XXIXIXXXXX",
+              "XXXLXXXXXX",
+              "XXXXXXXXXX"
+            ],
+            "points": [
+              [
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X"
+              ],
+              [
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X"
+              ],
+              [
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X"
+              ]
+            ]
+          }
+        },
+        {
+          "text": "asdd",
           "scale": {
             "rows": 3,
             "cols": 10,
@@ -37,6 +96,56 @@
       "subjects": [
         {
           "text": "asd",
+          "scale": {
+            "rows": 3,
+            "cols": 10,
+            "format": [
+              "XXIXIXXXXX",
+              "XXXLXXXXXX",
+              "XXXXXXXXXX"
+            ],
+            "points": [
+              [
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X"
+              ],
+              [
+                "X",
+                "X",
+                "X",
+                "10.00",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X"
+              ],
+              [
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X"
+              ]
+            ]
+          }
+        },
+        {
+          "text": "asdd",
           "scale": {
             "rows": 3,
             "cols": 10,
