@@ -6,6 +6,8 @@ export default class FormatService {
                 if (res.length != 0) {
                     console.log(res[0])
                     return Promise.resolve(res[0])
+                } else {
+                    return Promise.reject()
                 }
             })
     }

@@ -193,13 +193,9 @@ export class View {
             ev.cancelBubble = true
         }
         subjectDiv.onclick = () => {
-            this.table.main.hidden = false
             this.saveCurrentSubject()
-            this.table.deselectAll()
-            this.selectedSubject = subjectDiv
-            this.selectSubject(subjectDiv)
             let subjectFromService = this.service.data.subjects
-                .find(subject => subject.text == this.selectedSubject.id)
+                .find(subject => subject.text == subjectDiv.id)
             FormatService.getFormat(subjectFromService)
                 .then(res => {
                     this.table.updateData({
@@ -208,7 +204,24 @@ export class View {
                         rows: subjectFromService.scale.rows,
                         cols: subjectFromService.scale.cols
                     }, this.service.data.superUser)
+                    this.table.main.hidden = false
+                    this.table.deselectAll()
+                    this.selectedSubject = subjectDiv
+                    this.selectSubject(subjectDiv)
+
                 })
+                .catch(rej => {
+                    alert('Subject no longer exists')
+                    const newSubjects = this.service.data.subjects
+                        .filter(subject => {
+                            return subject.text != subjectDiv.id
+                        })
+                    this.service.data.subjects = newSubjects
+                    this.deleteAsideOne(parent, subjectDiv.id)
+                    this.service.updateUser()
+                })
+
+
         }
         return subjectDiv
 

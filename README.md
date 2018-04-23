@@ -20,12 +20,14 @@ U levo polje se unosi broj osvojenih poena, u desno maksimalni broj poena.
 
 Klikom na dugme Calculate se prikazuje broj najvise osvojenih poena (po skali).
 
-Tabela i poeni se cuvaju u bazi pritiskom na dugme 'Save', inace se izmene brisu.
+### TODO
+
+- Rxjs za biranje predmeta
 
 ### FUNKCIONALNI NEDOSTACI:
 - Problemi sa drag and drop
-- Brisanje se ne azurira
-- Ne prikazuju se poeni u formi
 
-### KOZMETICKI NEDOSTACI: 
+### KOZMETICKI NEDOSTACI:
+- Prikazivanje nula poena
+- Pri promeni usera se subject input ne menja
 
