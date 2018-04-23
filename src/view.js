@@ -79,10 +79,18 @@ export class View {
                 this.service.checkUser(credentials)
                     .then(res => this.service.setData(res))
                     .then(res => this.updateAside(this.sideList, this.service.data.subjects))
-                    .then(() => this.displayPage('mainPageDiv'))
                     .then(() => {
+                        this.displayPage('mainPageDiv')
+                        let userString
+                        if (this.service.data.superUser) {
+                            userString = 'Moderator'
+                        } else {
+                            userString = 'Standard'
+                        }
+                        document.getElementById('userType').innerHTML = userString
                         userInput.input.value = ''
                         passInput.input.value = ''
+
                     })
                     .catch(rej => {})
             })
@@ -115,31 +123,32 @@ export class View {
         this.sideList = aside
         this.table = new Table(contentHolder)
         this.table.main.hidden = true
-        this.saveButton = Widgets.button(contentHolder, 'Save table')
-        this.saveButton.hidden = true
-        this.saveButton.onclick = () => {
+        return contentHolder
+    }
+    saveCurrentSubject() {
+        if (this.selectedSubject) {
             const selected = this.service.data.subjects
                 .find(subject => subject.text == this.selectedSubject.id)
             if (selected) {
                 selected.scale = this.table.getData()
-            }
-            this.service.updateUser()
-            if (this.service.data.superUser) {
-                FormatService.putFormat(selected, this.service.data.id)
+                this.service.updateUser()
+                if (this.service.data.superUser) {
+                    FormatService.putFormat(selected, this.service.data.id)
+                }
             }
         }
-        this.tableHolder = Widgets.div(contentHolder, 'tableHolder')
-        this.tableHolder.appendChild(this.table.main)
-        this.tableHolder.appendChild(this.saveButton)
-        return contentHolder
     }
     header(parent) {
         const header = document.createElement('header')
+        const appTitle = Widgets.textElement(header, 'h1', 'Skaly.')
+        const userType = Widgets.textElement(header, 'h2', '')
+        userType.id = 'userType'
         const logoutButton = Widgets.button(header, 'Logout')
         logoutButton.onclick = () => {
             this.deleteAside(this.sideList, this.service.data.subjects)
             this.table.main.hidden = true
-            this.saveButton.hidden = true
+            this.saveCurrentSubject()
+            this.selectedSubject = null
             this.displayPage('loginPageDiv')
         }
         parent.appendChild(header)
@@ -166,7 +175,7 @@ export class View {
         text.innerHTML = data.text
         subjectDiv.appendChild(text)
 
-        const deleteBox = this.deleteBox(subjectDiv)
+        const deleteBox = Widgets.imageDiv(subjectDiv, 'deleteBox', './src/img/delete.png')
         deleteBox.onclick = (ev) => {
             const oldSubject = this.service.data.subjects
                 .find(subject => subject.text == subjectDiv.id)
@@ -185,7 +194,7 @@ export class View {
         }
         subjectDiv.onclick = () => {
             this.table.main.hidden = false
-            this.saveButton.hidden = false
+            this.saveCurrentSubject()
             this.table.deselectAll()
             this.selectedSubject = subjectDiv
             this.selectSubject(subjectDiv)
@@ -203,11 +212,6 @@ export class View {
         }
         return subjectDiv
 
-    }
-    deleteBox(parent) {
-        const deleteBox = Widgets.div(parent, 'deleteBox')
-        deleteBox.innerHTML = 'x'
-        return deleteBox
     }
     updateAside(aside, data) {
         if (data) {

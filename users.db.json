@@ -4,7 +4,7 @@
       "id": "asd",
       "user": "dare",
       "format": [
-        "XXIXIXXXXX",
+        "XXIXLXXXXX",
         "XXXLXXXXXX",
         "XXXXXXXXXX"
       ]
@@ -13,7 +13,7 @@
       "id": "asdd",
       "user": "dare",
       "format": [
-        "XXXXXXXXXX",
+        "XXXIXXXXXX",
         "XXXXXXXXXX",
         "XXXXXXXXXX"
       ]
@@ -31,7 +31,7 @@
             "rows": 3,
             "cols": 10,
             "format": [
-              "XXIXIXXXXX",
+              "XXIXLXXXXX",
               "XXXLXXXXXX",
               "XXXXXXXXXX"
             ],
@@ -81,9 +81,47 @@
             "rows": 3,
             "cols": 10,
             "format": [
-              "XXXXXXXXXX",
+              "XXXIXXXXXX",
               "XXXXXXXXXX",
               "XXXXXXXXXX"
+            ],
+            "points": [
+              [
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X"
+              ],
+              [
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X"
+              ],
+              [
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X"
+              ]
             ]
           }
         }
@@ -100,7 +138,7 @@
             "rows": 3,
             "cols": 10,
             "format": [
-              "XXIXIXXXXX",
+              "XXIXLXXXXX",
               "XXXLXXXXXX",
               "XXXXXXXXXX"
             ],
@@ -108,9 +146,9 @@
               [
                 "X",
                 "X",
+                "10.00",
                 "X",
-                "X",
-                "X",
+                "20.00",
                 "X",
                 "X",
                 "X",
@@ -121,7 +159,7 @@
                 "X",
                 "X",
                 "X",
-                "10.00",
+                "5.00",
                 "X",
                 "X",
                 "X",
@@ -150,9 +188,47 @@
             "rows": 3,
             "cols": 10,
             "format": [
-              "XXXXXXXXXX",
+              "XXXIXXXXXX",
               "XXXXXXXXXX",
               "XXXXXXXXXX"
+            ],
+            "points": [
+              [
+                "X",
+                "X",
+                "X",
+                "5.00",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X"
+              ],
+              [
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X"
+              ],
+              [
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X"
+              ]
             ]
           }
         }

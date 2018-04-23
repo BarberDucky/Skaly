@@ -91,7 +91,7 @@ h1 {
     flex-direction: column;
 }
 
-.inputDiv .input {
+.inputDiv>.input {
     border-radius: 5px;
     padding: 7px;
     border: 1.5px solid grey;
@@ -106,6 +106,10 @@ mainPageDiv {
 header {
     height: 67px;
     background-color: #004ead;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    color: white;
 }
 
 header .button {
@@ -118,6 +122,18 @@ header .button {
     margin: 14px;
     border-radius: 5px;
     font-family: 'Open Sans', sans-serif;
+}
+
+header>h1 {
+    color: white;
+    font-size: 2em;
+    font-weight: lighter;
+    margin: 10px;
+}
+
+header>h2 {
+    color: white;
+    font-weight: lighter;
 }
 
 .aside {
@@ -152,24 +168,6 @@ header .button {
     }
 }
 
-.tableHolder {
-    display: flex;
-    flex-direction: column;
-}
-
-.tableHolder>.button {
-    color: white;
-    font-size: 15px;
-    background-color: #004ead;
-    border: none;
-    height: 40px;
-    min-width: 92px;
-    padding: 10px;
-    margin: 14px;
-    border-radius: 5px;
-    font-family: 'Open Sans', sans-serif;
-}
-
 .subjectDiv {
     background-color: #f7b10f;
     position: relative;
@@ -193,11 +191,6 @@ header .button {
     right: 0;
     height: 20px;
     width: 20px;
-    color: white;
-    text-align: center;
-    border: 1px solid white;
-    border-radius: 10px;
-    background-color: #157EFB;
 }
 
 .subjectAddButton {
@@ -231,7 +224,20 @@ header .button {
     height: 200px;
     border-radius: 10px;
     margin: 10px;
-    border: 1px solid black;
+    border: 2px solid grey;
+}
+
+.subjectInput>button {
+    color: white;
+    font-size: 15px;
+    background-color: #004ead;
+    border: none;
+    height: 40px;
+    min-width: 92px;
+    padding: 10px;
+    margin: 14px;
+    border-radius: 5px;
+    font-family: 'Open Sans', sans-serif;
 }
 
 [hidden] {
@@ -244,6 +250,19 @@ header .button {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.tableMain>button {
+    color: white;
+    font-size: 15px;
+    background-color: #004ead;
+    border: none;
+    height: 40px;
+    min-width: 92px;
+    padding: 10px;
+    margin: 14px;
+    border-radius: 5px;
+    font-family: 'Open Sans', sans-serif;
 }
 
 table {
@@ -311,4 +330,30 @@ th {
     right: 0px;
     bottom: 10px;
     border-radius: 10px;
+}
+
+.pointDiv {
+    border: 2px solid grey;
+    border-radius: 5px;
+    margin: 5px;
+    padding: 5px;
+    display: flex;
+    flex-direction: row;
+}
+
+.pointDiv>button {
+    color: white;
+    font-size: 15px;
+    background-color: #004ead;
+    border: none;
+    height: 40px;
+    min-width: 92px;
+    padding: 10px;
+    margin: 14px;
+    border-radius: 5px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.pointDiv .inputDiv {
+    margin-left: 14px;
 }

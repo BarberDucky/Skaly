@@ -42,4 +42,13 @@ export default class Widgets {
         parent.appendChild(element)
         return element
     }
+    static imageDiv(parent, className, src) {
+        let div = Widgets.div(parent, className)
+        let image = document.createElement('img')
+        image.src = src
+        image.style.maxHeight = '100%'
+        image.style.maxWidth = '100%'
+        div.appendChild(image)
+        return div
+    }
 }
