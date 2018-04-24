@@ -27,6 +27,22 @@ export class UsersService {
                 })
         }
     }
+    checkUserExists(id) {
+        if (id != '') {
+            return fetch(`http://localhost:3000/users?id=${id}`)
+                .then(res => res.json())
+                .then(res => {
+                    if (res.length != 0) {
+                        return Promise.resolve()
+                    } else {
+                        return Promise.reject()
+                    }
+                })
+        } else {
+            return Promise.resolve()
+        }
+    }
+
     checkUser(credentials) {
         if (!credentials.id || !credentials.password) {
             alert('Input username and password')

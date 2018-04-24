@@ -51,4 +51,14 @@ export default class Widgets {
         div.appendChild(image)
         return div
     }
+    static checkInput(input, state) {
+        let color
+        if (state) {
+            color = "red"
+        } else {
+            color = "green"
+        }
+        input.style.outline = `2px solid ${color}`
+
+    }
 }

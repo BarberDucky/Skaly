@@ -32,6 +32,18 @@ export class View {
 
         const superCheck = Widgets.inputDiv(regDiv, 'checkbox', "Super user", true)
 
+        const promiseObs = (text) => Rxjs.Observable.fromPromise(this.service.checkUserExists(text)
+            .then(res => true)
+            .catch(rej => false)
+        )
+
+        Rxjs.Observable.fromEvent(userInput.input, 'input')
+            .debounceTime(500)
+            .map(event => event.target.value)
+            .switchMap(value => promiseObs(value))
+            .subscribe(res => Widgets.checkInput(userInput.input, res))
+
+
         const submitButton = Widgets.button(regDiv, 'REGISTER')
         Rxjs.Observable.fromEvent(submitButton, 'click')
             .subscribe(() => {
@@ -264,6 +276,18 @@ export class View {
         const nameInput = Widgets.inputDiv(subjectInput, 'text', 'Subject name')
 
         const submitButton = Widgets.button(subjectInput, 'Submit subject')
+
+        /*const formatObservable = Rxjs.Observable.fromPromise(
+            FormatService.getFormat(newInput)
+        )
+
+        Rxjs.Observable.fromEvent(nameInput.input, 'input')
+            .debounceTime(500)
+            .do(tandara => console.log(tandara))
+            .map(event =>event.target.value)
+            .switchMap(text => formatObservable)
+            .subscribe(formats => console.log(formats))*/
+
         submitButton.onclick = () => {
             if (nameInput.input.value != '' && !this.checkDuplicate(nameInput.input.value)) {
                 const newInput = {

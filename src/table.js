@@ -127,7 +127,6 @@ export default class Table {
                 if (oldCell != newCell) {
                     this.selectedBox = newCell
                     this.PointInput.hidden = false
-                    console.log(newCell)
                     this.selectCell(newCell)
                 }
             }
@@ -335,7 +334,6 @@ export default class Table {
         pointDiv.style.borderColor = "white"
     }
     deselectCell(pointDiv) {
-        console.log(pointDiv)
         if (pointDiv) {
             let color = pointDiv.style.backgroundColor
             pointDiv.style.color = color

@@ -1,5 +1,6 @@
 export default class FormatService {
     static getFormat(subject) {
+        console.log(subject)
         return fetch(`http://localhost:3000/formats?id=${subject.text}`)
             .then(res => res.json())
             .then(res => {

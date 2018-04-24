@@ -4,8 +4,8 @@
       "id": "asd",
       "user": "dare",
       "format": [
-        "XXXXLIXXXX",
-        "XXXXPXD+XX",
+        "XXXXLIDXXX",
+        "XXL++XO+XX",
         "XXXXXXXXXX"
       ]
     },
@@ -15,6 +15,15 @@
       "format": [
         "XXXXLXXXXX",
         "XXXXXXXXXX",
+        "XXXXXXXXXX"
+      ]
+    },
+    {
+      "id": "damjan",
+      "user": "damjan",
+      "format": [
+        "XXXIXPXXXX",
+        "XXXXLXXXXX",
         "XXXXXXXXXX"
       ]
     }
@@ -31,8 +40,8 @@
             "rows": 3,
             "cols": 10,
             "format": [
-              "XXXXLIXXXX",
-              "XXXXPXD+XX",
+              "XXXXLIDXXX",
+              "XXL++XO+XX",
               "XXXXXXXXXX"
             ],
             "points": [
@@ -181,15 +190,22 @@
               ]
             ]
           }
-        },
+        }
+      ]
+    },
+    {
+      "id": "damjan",
+      "password": "asd",
+      "superUser": true,
+      "subjects": [
         {
-          "text": "asdd",
+          "text": "damjan",
           "scale": {
             "rows": 3,
             "cols": 10,
             "format": [
+              "XXXIXPXXXX",
               "XXXXLXXXXX",
-              "XXXXXXXXXX",
               "XXXXXXXXXX"
             ],
             "points": [
@@ -198,7 +214,7 @@
                 "X",
                 "X",
                 "X",
-                5,
+                "X",
                 "X",
                 "X",
                 "X",
