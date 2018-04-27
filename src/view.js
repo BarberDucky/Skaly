@@ -2,12 +2,9 @@ import * as Rxjs from 'rxjs'
 import Table from './table'
 import Widgets from './widgets'
 import FormatService from './format.service'
-import {
-    UsersService
-} from './users.service'
+import UsersService from './users.service'
 export class View {
     constructor() {
-        this.service = new UsersService
         this.sideList = {}
         this.selectedSubject = {}
         this.table = {}
@@ -32,7 +29,7 @@ export class View {
 
         const superCheck = Widgets.inputDiv(regDiv, 'checkbox', "Super user", true)
 
-        const promiseObs = (text) => Rxjs.Observable.fromPromise(this.service.checkUserExists(text)
+        const promiseObs = (text) => Rxjs.Observable.fromPromise(UsersService.checkUserExists(text)
             .then(res => true)
             .catch(rej => false)
         )
@@ -52,7 +49,7 @@ export class View {
                     password: passInput.input.value,
                     superUser: superCheck.input.checked
                 }
-                this.service.addUser(credentials)
+                UsersService.addUser(credentials)
                     .then(() => this.displayPage('loginPageDiv'))
                     .then(() => {
                         userInput.input.value = ''
@@ -88,13 +85,13 @@ export class View {
                     id: userInput.input.value,
                     password: passInput.input.value
                 }
-                this.service.checkUser(credentials)
-                    .then(res => this.service.setData(res))
-                    .then(res => this.updateAside(this.sideList, this.service.data.subjects))
+                UsersService.checkUser(credentials)
+                    .then(res => UsersService.setData(res))
+                    .then(res => this.updateAside(this.sideList, UsersService.getSubjects()))
                     .then(() => {
                         this.displayPage('mainPageDiv')
                         let userString
-                        if (this.service.data.superUser) {
+                        if (UsersService.getSuperUser()) {
                             userString = 'Moderator'
                         } else {
                             userString = 'Standard'
@@ -131,7 +128,7 @@ export class View {
     contentHolder(parent) {
         const contentHolder = Widgets.div(parent, 'contentHolder')
         const aside = this.aside(contentHolder)
-        this.updateAside(aside, this.service.data.subjects)
+        this.updateAside(aside, UsersService.getSubjects())
         this.sideList = aside
         this.table = new Table(contentHolder)
         this.table.main.hidden = true
@@ -139,13 +136,13 @@ export class View {
     }
     saveCurrentSubject() {
         if (this.selectedSubject) {
-            const selected = this.service.data.subjects
+            const selected = UsersService.getSubjects()
                 .find(subject => subject.text == this.selectedSubject.id)
             if (selected) {
                 selected.scale = this.table.getData()
-                this.service.updateUser()
-                if (this.service.data.superUser) {
-                    FormatService.putFormat(selected, this.service.data.id)
+                UsersService.updateUser()
+                if (UsersService.getSuperUser()) {
+                    FormatService.putFormat(selected, UsersService.getData().id)
                 }
             }
         }
@@ -157,7 +154,7 @@ export class View {
         userType.id = 'userType'
         const logoutButton = Widgets.button(header, 'Logout')
         logoutButton.onclick = () => {
-            this.deleteAside(this.sideList, this.service.data.subjects)
+            this.deleteAside(this.sideList, UsersService.getSubjects())
             this.table.main.hidden = true
             this.saveCurrentSubject()
             this.selectedSubject = null
@@ -189,16 +186,16 @@ export class View {
 
         const deleteBox = Widgets.imageDiv(subjectDiv, 'deleteBox', './src/img/delete.png')
         deleteBox.onclick = (ev) => {
-            const oldSubject = this.service.data.subjects
+            const oldSubject = UsersService.getSubjects()
                 .find(subject => subject.text == subjectDiv.id)
-            const newSubjects = this.service.data.subjects
+            const newSubjects = UsersService.getSubjects()
                 .filter(subject => {
                     return subject.text != subjectDiv.id
                 })
-            this.service.data.subjects = newSubjects
+            UsersService.setSubjects(newSubjects)
             this.deleteAsideOne(parent, subjectDiv.id)
-            this.service.updateUser()
-            if (this.service.data.superUser) {
+            UsersService.updateUser()
+            if (UsersService.getSuperUser()) {
                 FormatService.deleteFormat(oldSubject)
             }
             this.table.main.hidden = true
@@ -206,7 +203,7 @@ export class View {
         }
         subjectDiv.onclick = () => {
             this.saveCurrentSubject()
-            let subjectFromService = this.service.data.subjects
+            let subjectFromService = UsersService.getSubjects()
                 .find(subject => subject.text == subjectDiv.id)
             FormatService.getFormat(subjectFromService)
                 .then(res => {
@@ -215,7 +212,7 @@ export class View {
                         points: subjectFromService.scale.points,
                         rows: subjectFromService.scale.rows,
                         cols: subjectFromService.scale.cols
-                    }, this.service.data.superUser)
+                    }, UsersService.getSuperUser())
                     this.table.main.hidden = false
                     this.table.deselectAll()
                     this.selectedSubject = subjectDiv
@@ -224,13 +221,13 @@ export class View {
                 })
                 .catch(rej => {
                     alert('Subject no longer exists')
-                    const newSubjects = this.service.data.subjects
+                    const newSubjects = UsersService.getSubjects()
                         .filter(subject => {
                             return subject.text != subjectDiv.id
                         })
-                    this.service.data.subjects = newSubjects
+                    UsersService.setSubjects(newSubjects)
                     this.deleteAsideOne(parent, subjectDiv.id)
-                    this.service.updateUser()
+                    UsersService.updateUser()
                 })
 
 
@@ -294,13 +291,13 @@ export class View {
                     text: nameInput.input.value,
                     scale: this.table.getEmptyScale()
                 }
-                if (this.service.data.superUser) {
-                    FormatService.postFormat(newInput, this.service.data.id)
+                if (UsersService.getSuperUser()) {
+                    FormatService.postFormat(newInput, UsersService.getData().id)
                         .then(() => {
-                            this.service.data.subjects.push(newInput)
+                            UsersService.getSubjects().push(newInput)
                             nameInput.input.value = ''
                             subjectInput.hidden = true
-                            this.service.updateUser()
+                            UsersService.updateUser()
                                 .then(this.updateAsideOne(parent, newInput))
                         })
                         .catch(rej => {})
@@ -309,10 +306,10 @@ export class View {
                         .then(res => {
                             newInput.text = res.id
                             newInput.scale.format = res.format
-                            this.service.data.subjects.push(newInput)
+                            UsersService.getSubjects().push(newInput)
                             nameInput.input.value = ''
                             subjectInput.hidden = true
-                            this.service.updateUser()
+                            UsersService.updateUser()
                                 .then(this.updateAsideOne(parent, newInput))
                         })
                         .catch(rej => alert("Subject doesn't exist"))
@@ -329,7 +326,7 @@ export class View {
         return subjectInput
     }
     checkDuplicate(text) {
-        let duplicates = this.service.data.subjects.filter(subject => subject.text == text)
+        let duplicates = UsersService.getSubjects().filter(subject => subject.text == text)
         if (duplicates.length == 0) {
             return false
         } else {

@@ -1,8 +1,8 @@
-export class UsersService {
+export default class UsersService {
     constructor() {
         this.data = {}
     }
-    addUser(credentials) {
+    static addUser(credentials) {
         if (!credentials.id || !credentials.password) {
             alert('Input username and password')
             return Promise.reject()
@@ -27,7 +27,7 @@ export class UsersService {
                 })
         }
     }
-    checkUserExists(id) {
+    static checkUserExists(id) {
         if (id != '') {
             return fetch(`http://localhost:3000/users?id=${id}`)
                 .then(res => res.json())
@@ -43,7 +43,7 @@ export class UsersService {
         }
     }
 
-    checkUser(credentials) {
+    static checkUser(credentials) {
         if (!credentials.id || !credentials.password) {
             alert('Input username and password')
             return Promise.reject()
@@ -61,11 +61,24 @@ export class UsersService {
                 })
         }
     }
-    setData(data) {
+    static setData(data) {
         this.data = data
         return new Promise((resolve, reject) => resolve(data))
     }
-    updateUser() {
+    static getData() {
+        return this.data
+    }
+    static getSubjects() {
+        if (this.data)
+            return this.data.subjects
+    }
+    static getSuperUser() {
+        return this.data.getSuperUser
+    }
+    static setSubjects(newSubjects) {
+        this.data.subjects = newSubjects
+    }
+    static updateUser() {
         return fetch(`http://localhost:3000/users/${this.data.id}`, {
             method: 'PUT',
             body: JSON.stringify(this.data),

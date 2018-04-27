@@ -147,8 +147,8 @@
             "rows": 3,
             "cols": 10,
             "format": [
-              "XXXXLIXXXX",
-              "XXXXPXD+XX",
+              "XXXXLIDXXX",
+              "XXL++XO+XX",
               "XXXXXXXXXX"
             ],
             "points": [
@@ -157,7 +157,57 @@
                 "X",
                 "X",
                 "X",
-                10,
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X"
+              ],
+              [
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X"
+              ],
+              [
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
+                "X"
+              ]
+            ]
+          }
+        },
+        {
+          "text": "damjan",
+          "scale": {
+            "rows": 3,
+            "cols": 10,
+            "format": [
+              "XXXIXPXXXX",
+              "XXXXLXXXXX",
+              "XXXXXXXXXX"
+            ],
+            "points": [
+              [
+                "X",
+                "X",
+                "X",
+                "X",
+                "X",
                 "X",
                 "X",
                 "X",
@@ -213,9 +263,9 @@
                 "X",
                 "X",
                 "X",
+                5,
                 "X",
-                "X",
-                "X",
+                10,
                 "X",
                 "X",
                 "X",
@@ -226,7 +276,7 @@
                 "X",
                 "X",
                 "X",
-                "X",
+                10,
                 "X",
                 "X",
                 "X",
