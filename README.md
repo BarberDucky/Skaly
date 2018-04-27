@@ -29,5 +29,5 @@ Klikom na dugme Calculate se prikazuje broj najvise osvojenih poena (po skali).
 
 ### KOZMETICKI NEDOSTACI:
 - Prikazivanje nula poena
-- Pri promeni usera se subject input ne menja
+- Pri promeni korisnika se subject input ne menja
 

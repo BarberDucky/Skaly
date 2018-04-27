@@ -63,7 +63,6 @@ export default class UsersService {
     }
     static setData(data) {
         this.data = data
-        return new Promise((resolve, reject) => resolve(data))
     }
     static getData() {
         return this.data
@@ -73,7 +72,7 @@ export default class UsersService {
             return this.data.subjects
     }
     static getSuperUser() {
-        return this.data.getSuperUser
+        return this.data.superUser
     }
     static setSubjects(newSubjects) {
         this.data.subjects = newSubjects

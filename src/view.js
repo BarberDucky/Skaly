@@ -42,27 +42,26 @@ export class View {
 
 
         const submitButton = Widgets.button(regDiv, 'REGISTER')
-        Rxjs.Observable.fromEvent(submitButton, 'click')
-            .subscribe(() => {
-                const credentials = {
-                    id: userInput.input.value,
-                    password: passInput.input.value,
-                    superUser: superCheck.input.checked
-                }
-                UsersService.addUser(credentials)
-                    .then(() => this.displayPage('loginPageDiv'))
-                    .then(() => {
-                        userInput.input.value = ''
-                        passInput.input.value = ''
-                        superCheck.input.checked = false
-                    })
-                    .catch(rej => {})
-            })
-
+        submitButton.onclick = () => {
+            const credentials = {
+                id: userInput.input.value,
+                password: passInput.input.value,
+                superUser: superCheck.input.checked
+            }
+            UsersService.addUser(credentials)
+                .then(() => {
+                    this.displayPage('loginPageDiv')
+                    userInput.input.value = ''
+                    passInput.input.value = ''
+                    superCheck.input.checked = false
+                })
+                .catch(rej => {})
+        }
         const backButton = Widgets.button(regDiv, 'BACK')
         backButton.onclick = () => {
             userInput.input.value = ''
             passInput.input.value = ''
+            Widgets.checkInput(userInput.input, true)
             this.displayPage('loginPageDiv')
         }
         return regDiv
@@ -79,31 +78,28 @@ export class View {
         const passInput = Widgets.inputDiv(loginDiv, 'password', 'Password')
 
         const submitButton = Widgets.button(loginDiv, 'LOGIN')
-        Rxjs.Observable.fromEvent(submitButton, 'click')
-            .subscribe(() => {
-                const credentials = {
-                    id: userInput.input.value,
-                    password: passInput.input.value
-                }
-                UsersService.checkUser(credentials)
-                    .then(res => UsersService.setData(res))
-                    .then(res => this.updateAside(this.sideList, UsersService.getSubjects()))
-                    .then(() => {
-                        this.displayPage('mainPageDiv')
-                        let userString
-                        if (UsersService.getSuperUser()) {
-                            userString = 'Moderator'
-                        } else {
-                            userString = 'Standard'
-                        }
-                        document.getElementById('userType').innerHTML = userString
-                        userInput.input.value = ''
-                        passInput.input.value = ''
-
-                    })
-                    .catch(rej => {})
-            })
-
+        submitButton.onclick = () => {
+            const credentials = {
+                id: userInput.input.value,
+                password: passInput.input.value
+            }
+            UsersService.checkUser(credentials)
+                .then(res => {
+                    UsersService.setData(res)
+                    this.updateAside(this.sideList, UsersService.getSubjects())
+                    this.displayPage('mainPageDiv')
+                    let userString
+                    if (UsersService.getSuperUser()) {
+                        userString = 'Moderator'
+                    } else {
+                        userString = 'Standard'
+                    }
+                    document.getElementById('userType').innerHTML = userString
+                    userInput.input.value = ''
+                    passInput.input.value = ''
+                })
+                .catch(rej => {})
+        }
         const registerButton = Widgets.button(loginDiv, 'REGISTER')
         registerButton.onclick = () => this.displayPage('regPageDiv')
         return loginDiv
