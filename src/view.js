@@ -155,6 +155,7 @@ export class View {
             this.saveCurrentSubject()
             this.selectedSubject = null
             this.displayPage('loginPageDiv')
+            this.subjectInputDiv.reset()
         }
         parent.appendChild(header)
         return header
@@ -162,11 +163,11 @@ export class View {
     aside(parent) {
         const aside = document.createElement('div')
         aside.className = "aside"
-        const subjectInput = this.subjectInput(aside)
-        subjectInput.hidden = true
+        this.subjectInputDiv = this.subjectInput(aside)
+        this.subjectInputDiv.hidden = true
         const subjectAddButton = this.subjectAddButton(aside)
         subjectAddButton.onclick = () => {
-            subjectInput.hidden = false
+            this.subjectInputDiv.hidden = false
         }
         parent.appendChild(aside)
         return aside
@@ -291,8 +292,7 @@ export class View {
                     FormatService.postFormat(newInput, UsersService.getData().id)
                         .then(() => {
                             UsersService.getSubjects().push(newInput)
-                            nameInput.input.value = ''
-                            subjectInput.hidden = true
+                            subjectInput.reset()
                             UsersService.updateUser()
                                 .then(this.updateAsideOne(parent, newInput))
                         })
@@ -303,8 +303,7 @@ export class View {
                             newInput.text = res.id
                             newInput.scale.format = res.format
                             UsersService.getSubjects().push(newInput)
-                            nameInput.input.value = ''
-                            subjectInput.hidden = true
+                            subjectInput.reset()
                             UsersService.updateUser()
                                 .then(this.updateAsideOne(parent, newInput))
                         })
@@ -315,10 +314,14 @@ export class View {
             }
         }
         const cancelButton = Widgets.button(subjectInput, 'Cancel')
-        cancelButton.onclick = () => {
+        cancelButton.onclick = () => subjectInput.reset()
+
+        subjectInput.reset = () => {
             nameInput.input.value = ''
+            nameInput.addOptions(null)
             subjectInput.hidden = true
         }
+
         return subjectInput
     }
     checkDuplicate(text) {

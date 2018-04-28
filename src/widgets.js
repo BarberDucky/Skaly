@@ -70,9 +70,11 @@ export default class Widgets {
             while (datalist.firstChild) {
                 datalist.removeChild(datalist.firstChild);
             }
-            options.forEach(element => {
-                Widgets.option(datalist, element.id)
-            })
+            if (options) {
+                options.forEach(element => {
+                    Widgets.option(datalist, element.id)
+                })
+            }
         }
         return div
     }
