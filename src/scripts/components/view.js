@@ -275,7 +275,7 @@ export default class View {
             .catch(rej => null)
         )
         let subscription = Rxjs.Observable.fromEvent(nameInput.input, 'input')
-            .filter(event => !UsersService.getSuperUser())
+            .filter(event => UsersService.getSuperUser() == false)
             .debounceTime(500)
             .switchMap(event => formatObservable(event.target.value))
             .filter(res => res != null)

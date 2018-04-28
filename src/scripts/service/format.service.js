@@ -11,11 +11,9 @@ export default class FormatService {
             })
     }
     static getFormatRegExp(regExp) {
-        console.log(regExp)
         return fetch(`http://localhost:3000/formats?id_like=^${regExp}`)
             .then(res => res.json())
             .then(res => {
-                console.log(res)
                 if (res.length != 0) {
                     return Promise.resolve(res)
                 } else {

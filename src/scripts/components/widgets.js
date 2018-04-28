@@ -66,7 +66,6 @@ export default class Widgets {
         datalist.setAttribute('id', 'subjects')
         div.appendChild(datalist)
         div.addOptions = (options) => {
-            console.log(options)
             while (datalist.firstChild) {
                 datalist.removeChild(datalist.firstChild);
             }
