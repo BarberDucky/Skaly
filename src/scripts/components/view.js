@@ -1,9 +1,9 @@
 import * as Rxjs from 'rxjs'
 import Table from './table'
 import Widgets from './widgets'
-import FormatService from './format.service'
-import UsersService from './users.service'
-export class View {
+import FormatService from '../service/format.service'
+import UsersService from '../service/users.service'
+export default class View {
     constructor() {
         this.sideList = {}
         this.selectedSubject = {}

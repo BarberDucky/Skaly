@@ -1,5 +1,3 @@
-import {
-    View
-} from './view.js'
+import View from './scripts/components/view'
 
 const view = new View
