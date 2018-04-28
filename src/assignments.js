@@ -1,7 +1,7 @@
 export default class Assignments {
     static getAssignments() {
         const assignments = [{
-                text: 'Kolok',
+                text: 'Kolokv.',
                 color: '#b200ff'
             },
             {
@@ -18,7 +18,7 @@ export default class Assignments {
             },
             {
                 text: 'Domaci',
-                color: 'yellow'
+                color: '#683b11'
             },
             {
                 text: 'Ostalo',
