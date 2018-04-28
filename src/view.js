@@ -27,7 +27,7 @@ export class View {
 
         const passInput = Widgets.inputDiv(regDiv, 'password', 'Password')
 
-        const superCheck = Widgets.inputDiv(regDiv, 'checkbox', "Super user", true)
+        const superCheck = Widgets.inputDiv(regDiv, 'checkbox', "Are you a moderator? ", true)
 
         const promiseObs = (text) => Rxjs.Observable.fromPromise(UsersService.checkUserExists(text)
             .then(res => true)
