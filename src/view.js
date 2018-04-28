@@ -266,20 +266,20 @@ export class View {
     }
     subjectInput(parent) {
         const subjectInput = Widgets.div(parent, 'subjectInput')
-        const nameInput = Widgets.inputDiv(subjectInput, 'text', 'Subject name')
-
+        const nameInput = Widgets.inputList(subjectInput, 'Subject name')
         const submitButton = Widgets.button(subjectInput, 'Submit subject')
 
-        /*const formatObservable = Rxjs.Observable.fromPromise(
-            FormatService.getFormat(newInput)
+        const formatObservable = (text) => Rxjs.Observable.fromPromise(FormatService.getFormatRegExp(text)
+            .then(res => res)
+            .catch(rej => null)
         )
-
-        Rxjs.Observable.fromEvent(nameInput.input, 'input')
+        let subscription = Rxjs.Observable.fromEvent(nameInput.input, 'input')
+            .filter(event => !UsersService.getSuperUser())
             .debounceTime(500)
-            .do(tandara => console.log(tandara))
-            .map(event =>event.target.value)
-            .switchMap(text => formatObservable)
-            .subscribe(formats => console.log(formats))*/
+            .switchMap(event => formatObservable(event.target.value))
+            .filter(res => res != null)
+            .do(array => nameInput.addOptions(array))
+            .subscribe()
 
         submitButton.onclick = () => {
             if (nameInput.input.value != '' && !this.checkDuplicate(nameInput.input.value)) {

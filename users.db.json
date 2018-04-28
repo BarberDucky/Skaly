@@ -190,56 +190,6 @@
               ]
             ]
           }
-        },
-        {
-          "text": "damjan",
-          "scale": {
-            "rows": 3,
-            "cols": 10,
-            "format": [
-              "XXXIXPXXXX",
-              "XXXXLXXXXX",
-              "XXXXXXXXXX"
-            ],
-            "points": [
-              [
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X"
-              ],
-              [
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X"
-              ],
-              [
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X",
-                "X"
-              ]
-            ]
-          }
         }
       ]
     },

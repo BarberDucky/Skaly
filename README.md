@@ -20,10 +20,6 @@ U levo polje se unosi broj osvojenih poena, u desno maksimalni broj poena.
 
 Klikom na dugme Calculate se prikazuje broj najvise osvojenih poena (po skali).
 
-### TODO
-
-- Rxjs za biranje predmeta
-
 ### FUNKCIONALNI NEDOSTACI:
 - Problemi sa drag and drop
 

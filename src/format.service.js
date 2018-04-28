@@ -10,6 +10,24 @@ export default class FormatService {
                 }
             })
     }
+    static getFormatRegExp(regExp) {
+        console.log(regExp)
+        return fetch(`http://localhost:3000/formats?id_like=^${regExp}`)
+            .then(res => res.json())
+            .then(res => {
+                console.log(res)
+                if (res.length != 0) {
+                    return Promise.resolve(res)
+                } else {
+                    return Promise.reject()
+                }
+            })
+    }
+    static getFormatAll() {
+        return fetch(`http://localhost:3000/formats`)
+            .then(res => res.json())
+            .then(res => Promise.resolve(res))
+    }
     static postFormat(subject, user) {
         return fetch(`http://localhost:3000/formats?id=${subject.text}`)
             .then(res => res.json())

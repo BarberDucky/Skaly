@@ -35,7 +35,6 @@ export default class Widgets {
         }
         return inputDiv
     }
-
     static textElement(parent, type, text) {
         const element = document.createElement(type)
         element.innerHTML = text
@@ -59,6 +58,28 @@ export default class Widgets {
             color = "green"
         }
         input.style.outline = `2px solid ${color}`
-
+    }
+    static inputList(parent, text) {
+        const div = Widgets.inputDiv(parent, 'text', text)
+        div.input.setAttribute('list', 'subjects')
+        const datalist = document.createElement('datalist')
+        datalist.setAttribute('id', 'subjects')
+        div.appendChild(datalist)
+        div.addOptions = (options) => {
+            console.log(options)
+            while (datalist.firstChild) {
+                datalist.removeChild(datalist.firstChild);
+            }
+            options.forEach(element => {
+                Widgets.option(datalist, element.id)
+            })
+        }
+        return div
+    }
+    static option(parent, value) {
+        const option = document.createElement('option')
+        option.setAttribute('value', value)
+        parent.appendChild(option)
+        return option
     }
 }
