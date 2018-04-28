@@ -53,7 +53,11 @@ export default class Table {
                             this.table[i][j].lowerText.innerHTML = this.table[i][j].points
                         } else {
                             this.table[i][j].points = 0
-                            this.table[i][j].lowerText.innerHTML = ''
+                            if (superUser) {
+                                this.table[i][j].lowerText.innerHTML = ''
+                            } else {
+                                this.table[i][j].lowerText.innerHTML = 0
+                            }
                         }
                         if (this.superUser) {
                             this.table[i][j].ondragstart = (ev) => {

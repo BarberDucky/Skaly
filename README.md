@@ -23,6 +23,4 @@ Klikom na dugme Calculate se prikazuje broj najvise osvojenih poena (po skali).
 ### FUNKCIONALNI NEDOSTACI:
 - Problemi sa drag and drop
 
-### KOZMETICKI NEDOSTACI:
-- Prikazivanje nula poena
 
